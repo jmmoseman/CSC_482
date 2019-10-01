@@ -1,0 +1,370 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 8589934592 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2718), pid=198, tid=203
+#
+# JRE version:  (11.0.3+12) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.3+12-b304.39, mixed mode, aot, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Core dump will be written. Default location: Core dumps may be processed with "/lib/systemd/systemd-coredump %P %u %g %s %t 9223372036854775808 %e" (or dumping to /home/jeremy/IdeaProjects/SortPerformance/core.198)
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.io.tmpdir=/home/jeremy/.var/app/com.jetbrains.IntelliJ-IDEA-Community/cache/tmp/ -Xms8g -Xmx8g -javaagent:/app/idea-IC/lib/idea_rt.jar=39915:/app/idea-IC/bin -Dfile.encoding=UTF-8 SortPerformance
+
+Host: AMD Ryzen 9 3900X 12-Core Processor, 6 cores, 7G, Freedesktop.org 18.08.36 (Flatpak runtime)
+Time: Sat Sep  7 01:19:50 2019 CDT elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f382c012800):  JavaThread "Unknown thread" [_thread_in_vm, id=203, stack(0x00007f3832811000,0x00007f3832912000)]
+
+Stack: [0x00007f3832811000,0x00007f3832912000],  sp=0x00007f3832910220,  free space=1020k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xd96b9a]
+V  [libjvm.so+0xd97a33]
+V  [libjvm.so+0x698cb8]
+V  [libjvm.so+0xb9da59]
+V  [libjvm.so+0xb9558d]
+V  [libjvm.so+0x7a04b1]
+V  [libjvm.so+0x7a0605]
+V  [libjvm.so+0x7a07fa]
+V  [libjvm.so+0x7a80b6]
+V  [libjvm.so+0x8108d8]
+V  [libjvm.so+0x811434]
+V  [libjvm.so+0x811939]
+V  [libjvm.so+0x764100]
+V  [libjvm.so+0x7647f5]
+V  [libjvm.so+0xd5a311]
+V  [libjvm.so+0xd5a5c1]
+V  [libjvm.so+0x82721f]
+V  [libjvm.so+0xd37c2c]
+V  [libjvm.so+0x8cea9c]  JNI_CreateJavaVM+0x5c
+C  [libjli.so+0x4814]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000000001f82fe0, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00007f382c028000 GCTaskThread "GC Thread#0" [stack: 0x00007f3831ab7000,0x00007f3831bb7000] [id=204]
+  0x00007f382c049800 ConcurrentGCThread "G1 Main Marker" [stack: 0x00007f38302e9000,0x00007f38303e9000] [id=205]
+  0x00007f382c04b800 ConcurrentGCThread "G1 Conc#0" [stack: 0x00007f38301e7000,0x00007f38302e7000] [id=206]
+
+[error occurred during error reporting (printing all threads), id 0xb, SIGSEGV (0xb) at pc=0x00007f38333d6305]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f382c00fab0] Heap_lock - owner thread: 0x00007f382c012800
+
+Heap address: 0x0000000600000000, size: 8192 MB, Compressed Oops mode: Non-zero based: 0x0000000600000000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:01 426706                             /app/idea-IC/jbr/bin/java
+00601000-00602000 r--p 00001000 08:01 426706                             /app/idea-IC/jbr/bin/java
+00602000-00603000 rw-p 00002000 08:01 426706                             /app/idea-IC/jbr/bin/java
+01f6b000-01f8c000 rw-p 00000000 00:00 0                                  [heap]
+7f37f4000000-7f37f4021000 rw-p 00000000 00:00 0 
+7f37f4021000-7f37f8000000 ---p 00000000 00:00 0 
+7f37fc000000-7f37fc021000 rw-p 00000000 00:00 0 
+7f37fc021000-7f3800000000 ---p 00000000 00:00 0 
+7f3800bfc000-7f3803000000 rw-p 00000000 00:00 0 
+7f3803000000-7f3814000000 ---p 00000000 00:00 0 
+7f3814000000-7f3814021000 rw-p 00000000 00:00 0 
+7f3814021000-7f3818000000 ---p 00000000 00:00 0 
+7f3818063000-7f3818164000 rw-p 00000000 00:00 0 
+7f3818164000-7f3819164000 ---p 00000000 00:00 0 
+7f3819164000-7f38193d4000 rwxp 00000000 00:00 0 
+7f38193d4000-7f38196f4000 ---p 00000000 00:00 0 
+7f38196f4000-7f3819964000 rwxp 00000000 00:00 0 
+7f3819964000-7f3820c2c000 ---p 00000000 00:00 0 
+7f3820c2c000-7f3820e9c000 rwxp 00000000 00:00 0 
+7f3820e9c000-7f3828164000 ---p 00000000 00:00 0 
+7f3828164000-7f382c000000 r--s 00000000 08:01 426837                     /app/idea-IC/jbr/lib/modules
+7f382c000000-7f382c06e000 rw-p 00000000 00:00 0 
+7f382c06e000-7f3830000000 ---p 00000000 00:00 0 
+7f38300e4000-7f38301e5000 rw-p 00000000 00:00 0 
+7f38301e5000-7f38301e6000 ---p 00000000 00:00 0 
+7f38301e6000-7f38302e7000 rw-p 00000000 00:00 0 
+7f38302e7000-7f38302e8000 ---p 00000000 00:00 0 
+7f38302e8000-7f383046e000 rw-p 00000000 00:00 0 
+7f383046e000-7f383146e000 ---p 00000000 00:00 0 
+7f383146e000-7f3831ab5000 rw-p 00000000 00:00 0 
+7f3831ab5000-7f3831ab6000 ---p 00000000 00:00 0 
+7f3831ab6000-7f3831bbc000 rw-p 00000000 00:00 0 
+7f3831bbc000-7f3831ca2000 ---p 00000000 00:00 0 
+7f3831ca2000-7f3831ca7000 rw-p 00000000 00:00 0 
+7f3831ca7000-7f3831d8d000 ---p 00000000 00:00 0 
+7f3831d8d000-7f3831d92000 r-xp 00000000 08:01 426802                     /app/idea-IC/jbr/lib/libjimage.so
+7f3831d92000-7f3831f92000 ---p 00005000 08:01 426802                     /app/idea-IC/jbr/lib/libjimage.so
+7f3831f92000-7f3831f93000 r--p 00005000 08:01 426802                     /app/idea-IC/jbr/lib/libjimage.so
+7f3831f93000-7f3831f94000 rw-p 00006000 08:01 426802                     /app/idea-IC/jbr/lib/libjimage.so
+7f3831f94000-7f3831f9b000 r-xp 00000000 08:01 426834                     /app/idea-IC/jbr/lib/libzip.so
+7f3831f9b000-7f383219a000 ---p 00007000 08:01 426834                     /app/idea-IC/jbr/lib/libzip.so
+7f383219a000-7f383219b000 r--p 00006000 08:01 426834                     /app/idea-IC/jbr/lib/libzip.so
+7f383219b000-7f383219c000 rw-p 00007000 08:01 426834                     /app/idea-IC/jbr/lib/libzip.so
+7f383219c000-7f383219f000 r--p 00000000 08:01 680812                     /usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
+7f383219f000-7f38321a6000 r-xp 00003000 08:01 680812                     /usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
+7f38321a6000-7f38321a8000 r--p 0000a000 08:01 680812                     /usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
+7f38321a8000-7f38321a9000 r--p 0000c000 08:01 680812                     /usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
+7f38321a9000-7f38321aa000 rw-p 0000d000 08:01 680812                     /usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
+7f38321aa000-7f38321b0000 rw-p 00000000 00:00 0 
+7f38321b6000-7f38321bb000 rw-p 00000000 00:00 0 
+7f38321bb000-7f38321c2000 ---p 00000000 00:00 0 
+7f38321c2000-7f38321cc000 r-xp 00000000 08:01 426776                     /app/idea-IC/jbr/lib/libinstrument.so
+7f38321cc000-7f38323cb000 ---p 0000a000 08:01 426776                     /app/idea-IC/jbr/lib/libinstrument.so
+7f38323cb000-7f38323cc000 r--p 00009000 08:01 426776                     /app/idea-IC/jbr/lib/libinstrument.so
+7f38323cc000-7f38323cd000 rw-p 0000a000 08:01 426776                     /app/idea-IC/jbr/lib/libinstrument.so
+7f38323cd000-7f38323f6000 r-xp 00000000 08:01 426782                     /app/idea-IC/jbr/lib/libjava.so
+7f38323f6000-7f38325f5000 ---p 00029000 08:01 426782                     /app/idea-IC/jbr/lib/libjava.so
+7f38325f5000-7f38325f6000 r--p 00028000 08:01 426782                     /app/idea-IC/jbr/lib/libjava.so
+7f38325f6000-7f38325f8000 rw-p 00029000 08:01 426782                     /app/idea-IC/jbr/lib/libjava.so
+7f38325f8000-7f3832605000 r-xp 00000000 08:01 426830                     /app/idea-IC/jbr/lib/libverify.so
+7f3832605000-7f3832804000 ---p 0000d000 08:01 426830                     /app/idea-IC/jbr/lib/libverify.so
+7f3832804000-7f3832806000 r--p 0000c000 08:01 426830                     /app/idea-IC/jbr/lib/libverify.so
+7f3832806000-7f3832807000 rw-p 0000e000 08:01 426830                     /app/idea-IC/jbr/lib/libverify.so
+7f3832807000-7f3832809000 r--p 00000000 08:01 680968                     /usr/lib/x86_64-linux-gnu/librt-2.28.so
+7f3832809000-7f383280d000 r-xp 00002000 08:01 680968                     /usr/lib/x86_64-linux-gnu/librt-2.28.so
+7f383280d000-7f383280f000 r--p 00006000 08:01 680968                     /usr/lib/x86_64-linux-gnu/librt-2.28.so
+7f383280f000-7f3832810000 r--p 00007000 08:01 680968                     /usr/lib/x86_64-linux-gnu/librt-2.28.so
+7f3832810000-7f3832811000 rw-p 00008000 08:01 680968                     /usr/lib/x86_64-linux-gnu/librt-2.28.so
+7f3832811000-7f3832815000 ---p 00000000 00:00 0 
+7f3832815000-7f3832912000 rw-p 00000000 00:00 0 
+7f3832912000-7f3832915000 r--p 00000000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f3832915000-7f3832927000 r-xp 00003000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f3832927000-7f383292a000 r--p 00015000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f383292a000-7f383292b000 ---p 00018000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f383292b000-7f383292c000 r--p 00018000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f383292c000-7f383292d000 rw-p 00019000 08:01 680287                     /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+7f383292d000-7f383293a000 r--p 00000000 08:01 680735                     /usr/lib/x86_64-linux-gnu/libm-2.28.so
+7f383293a000-7f38329df000 r-xp 0000d000 08:01 680735                     /usr/lib/x86_64-linux-gnu/libm-2.28.so
+7f38329df000-7f3832ab6000 r--p 000b2000 08:01 680735                     /usr/lib/x86_64-linux-gnu/libm-2.28.so
+7f3832ab6000-7f3832ab7000 r--p 00188000 08:01 680735                     /usr/lib/x86_64-linux-gnu/libm-2.28.so
+7f3832ab7000-7f3832ab8000 rw-p 00189000 08:01 680735                     /usr/lib/x86_64-linux-gnu/libm-2.28.so
+7f3832ab8000-7f3832b49000 r--p 00000000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832b49000-7f3832c06000 r-xp 00091000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832c06000-7f3832c46000 r--p 0014e000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832c46000-7f3832c47000 ---p 0018e000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832c47000-7f3832c51000 r--p 0018e000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832c51000-7f3832c53000 rw-p 00198000 08:01 681053                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+7f3832c53000-7f3832c57000 rw-p 00000000 00:00 0 
+7f3832c57000-7f3833cff000 r-xp 00000000 08:01 427001                     /app/idea-IC/jbr/lib/server/libjvm.so
+7f3833cff000-7f3833eff000 ---p 010a8000 08:01 427001                     /app/idea-IC/jbr/lib/server/libjvm.so
+7f3833eff000-7f3833fcd000 r--p 010a8000 08:01 427001                     /app/idea-IC/jbr/lib/server/libjvm.so
+7f3833fcd000-7f3834007000 rw-p 01176000 08:01 427001                     /app/idea-IC/jbr/lib/server/libjvm.so
+7f3834007000-7f3834062000 rw-p 00000000 00:00 0 
+7f3834062000-7f3834084000 r--p 00000000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f3834084000-7f38341d1000 r-xp 00022000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f38341d1000-7f383421d000 r--p 0016f000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f383421d000-7f383421e000 ---p 001bb000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f383421e000-7f3834222000 r--p 001bb000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f3834222000-7f3834224000 rw-p 001bf000 08:01 680051                     /usr/lib/x86_64-linux-gnu/libc-2.28.so
+7f3834224000-7f3834228000 rw-p 00000000 00:00 0 
+7f3834228000-7f3834229000 r--p 00000000 08:01 680132                     /usr/lib/x86_64-linux-gnu/libdl-2.28.so
+7f3834229000-7f383422b000 r-xp 00001000 08:01 680132                     /usr/lib/x86_64-linux-gnu/libdl-2.28.so
+7f383422b000-7f383422c000 r--p 00003000 08:01 680132                     /usr/lib/x86_64-linux-gnu/libdl-2.28.so
+7f383422c000-7f383422d000 r--p 00003000 08:01 680132                     /usr/lib/x86_64-linux-gnu/libdl-2.28.so
+7f383422d000-7f383422e000 rw-p 00004000 08:01 680132                     /usr/lib/x86_64-linux-gnu/libdl-2.28.so
+7f383422e000-7f383423d000 r-xp 00000000 08:01 426991                     /app/idea-IC/jbr/lib/jli/libjli.so
+7f383423d000-7f383443c000 ---p 0000f000 08:01 426991                     /app/idea-IC/jbr/lib/jli/libjli.so
+7f383443c000-7f383443d000 r--p 0000e000 08:01 426991                     /app/idea-IC/jbr/lib/jli/libjli.so
+7f383443d000-7f383443e000 rw-p 0000f000 08:01 426991                     /app/idea-IC/jbr/lib/jli/libjli.so
+7f383443e000-7f3834444000 r--p 00000000 08:01 680942                     /usr/lib/x86_64-linux-gnu/libpthread-2.28.so
+7f3834444000-7f3834454000 r-xp 00006000 08:01 680942                     /usr/lib/x86_64-linux-gnu/libpthread-2.28.so
+7f3834454000-7f383445a000 r--p 00016000 08:01 680942                     /usr/lib/x86_64-linux-gnu/libpthread-2.28.so
+7f383445a000-7f383445b000 r--p 0001b000 08:01 680942                     /usr/lib/x86_64-linux-gnu/libpthread-2.28.so
+7f383445b000-7f383445c000 rw-p 0001c000 08:01 680942                     /usr/lib/x86_64-linux-gnu/libpthread-2.28.so
+7f383445c000-7f3834460000 rw-p 00000000 00:00 0 
+7f3834460000-7f3834463000 r--p 00000000 08:01 681371                     /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f3834463000-7f3834471000 r-xp 00003000 08:01 681371                     /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f3834471000-7f3834478000 r--p 00011000 08:01 681371                     /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f3834478000-7f3834479000 r--p 00017000 08:01 681371                     /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f3834479000-7f383447a000 rw-p 00018000 08:01 681371                     /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f383447a000-7f383447c000 rw-p 00000000 00:00 0 
+7f3834484000-7f383448c000 rw-s 00000000 00:33 130                        /tmp/hsperfdata_jeremy/198
+7f383448c000-7f383448d000 ---p 00000000 00:00 0 
+7f383448d000-7f383448e000 r--p 00000000 00:00 0 
+7f383448e000-7f383448f000 r--p 00000000 08:01 679756                     /usr/lib/x86_64-linux-gnu/ld-2.28.so
+7f383448f000-7f38344af000 r-xp 00001000 08:01 679756                     /usr/lib/x86_64-linux-gnu/ld-2.28.so
+7f38344af000-7f38344b7000 r--p 00021000 08:01 679756                     /usr/lib/x86_64-linux-gnu/ld-2.28.so
+7f38344b8000-7f38344b9000 r--p 00029000 08:01 679756                     /usr/lib/x86_64-linux-gnu/ld-2.28.so
+7f38344b9000-7f38344ba000 rw-p 0002a000 08:01 679756                     /usr/lib/x86_64-linux-gnu/ld-2.28.so
+7f38344ba000-7f38344bb000 rw-p 00000000 00:00 0 
+7fff297d3000-7fff297f4000 rw-p 00000000 00:00 0                          [stack]
+7fff297f9000-7fff297fc000 r--p 00000000 00:00 0                          [vvar]
+7fff297fc000-7fff297fe000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+
+VM Arguments:
+jvm_args: -Djava.io.tmpdir=/home/jeremy/.var/app/com.jetbrains.IntelliJ-IDEA-Community/cache/tmp/ -Xms8g -Xmx8g -javaagent:/app/idea-IC/lib/idea_rt.jar=39915:/app/idea-IC/bin -Dfile.encoding=UTF-8 
+java_command: SortPerformance
+java_class_path (initial): /home/jeremy/IdeaProjects/SortPerformance/out/production/SortPerformance
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 6                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 8589934592                                {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8589934592                                {product} {command line}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5830092                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122914074                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122914074                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=/home/jeremy/.var/app/com.jetbrains.IntelliJ-IDEA-Community/cache/tmp/
+PATH=/app/bin:/usr/bin
+SHELL=/bin/sh
+DISPLAY=:99.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xd97a90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xd97a90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0xd97a90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0xb99ae0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0xb99ae0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0xd97a90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.so+0xb99980], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGINT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGTERM: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGQUIT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+
+
+---------------  S Y S T E M  ---------------
+
+OS:NAME=Freedesktop.org
+VERSION="18.08.36 (Flatpak runtime)"
+VERSION_ID=18.08.36
+ID=org.freedesktop.platform
+PRETTY_NAME="Freedesktop.org 18.08.36 (Flatpak runtime)"
+BUG_REPORT_URL=https://gitlab.com/freedesktop-sdk/freedesktop-sdk/issuesuname:Linux 4.15.0-54-generic #58-Ubuntu SMP Mon Jun 24 10:55:24 UTC 2019 x86_64
+libc:glibc 2.28 NPTL 2.28 
+rlimit: STACK 8192k, CORE 0k, NPROC 31658, NOFILE 1048576, AS infinity, DATA infinity, FSIZE infinity
+load average:1.54 0.39 0.13
+
+/proc/meminfo:
+MemTotal:        8167548 kB
+MemFree:         5850388 kB
+MemAvailable:    6667564 kB
+Buffers:           46540 kB
+Cached:           974248 kB
+SwapCached:            0 kB
+Active:          1392532 kB
+Inactive:         747244 kB
+Active(anon):    1120112 kB
+Inactive(anon):     9660 kB
+Active(file):     272420 kB
+Inactive(file):   737584 kB
+Unevictable:          32 kB
+Mlocked:              32 kB
+SwapTotal:       1562240 kB
+SwapFree:        1562240 kB
+Dirty:              6976 kB
+Writeback:             0 kB
+AnonPages:       1119252 kB
+Mapped:           239976 kB
+Shmem:             10516 kB
+Slab:              82972 kB
+SReclaimable:      53036 kB
+SUnreclaim:        29936 kB
+KernelStack:        7820 kB
+PageTables:        29628 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     5646012 kB
+Committed_AS:    3606616 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      165824 kB
+DirectMap2M:     8222720 kB
+
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads):
+63316
+
+
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have):
+65530
+
+
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers):
+32768
+
+
+
+
+CPU:total 6 (initial active 6) (6 cores per cpu, 6 threads per core) family 23 model 113 stepping 0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, lzcnt, sse4a, ht, tsc, tscinvbit, tscinv
+CPU Model and flags from /proc/cpuinfo:
+model name	: AMD Ryzen 9 3900X 12-Core Processor
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch ssbd vmmcall fsgsbase avx2 rdseed clflushopt arat nrip_save flushbyasid decodeassists
+
+Memory: 4k page, physical 8167548k(5850388k free), swap 1562240k(1562240k free)
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.3+12-b304.39) for linux-amd64 JRE (11.0.3+12-b304.39), built on Aug 14 2019 08:20:17 by "" with gcc 4.8.5 20150623 (Red Hat 4.8.5-28)
+
+END.
