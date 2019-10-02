@@ -26,19 +26,8 @@ public class ThreeSum {
     }
 
     public static int countFastest(long arr[], int n) {
-        {  // source: https://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/
-            // there are at least two O(n^2) methods of doing this problem (among others). The first is similar to what I
-            // had in mind. After sorting (using quicksort) you have 2 index variables created inside of a main for loop
-            // then a while loop which dictates the logic to find tripples. I had a similar idea (element to specify
-            // location of remaining elements, then another that starts at the end of the list etc... Due to several issues
-            // (unstable computer, had to reinstall everything... etc.) I wasn't able to really get around to trying to do
-            // any of this myself... Regardless I'll be using the 2nd method from that page. Which is a rather dense
-            // complicated method using hashing tables (I figured there was some mathematical solution to this problem, but
-            // anyways...) The logic of this method makes sense, but it's only finding 2 triples instead of 4 for
-            // my test list?
-
-
-         //   boolean found = false;
+        {
+            //   boolean found = false;
             int count = 0;
 
             for (int i = 0; i < n - 1; i++)
@@ -51,7 +40,7 @@ public class ThreeSum {
                     long x = -(arr[i] + arr[j]);
                     if (s.contains(x))
                     {
-                        System.out.printf("%d %d %d\n", x, arr[i], arr[j]);
+                        //System.out.printf("%d %d %d\n", x, arr[i], arr[j]);
                         //found = true;
                         count++;
                     }
@@ -63,10 +52,10 @@ public class ThreeSum {
                 }
             }
 
-            if (count == 0)
+          /*  if (count == 0)
             {
                 System.out.printf(" No Triplet Found\n");
-            }
+            } */
             return count;
         }
 
