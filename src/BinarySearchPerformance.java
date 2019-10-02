@@ -43,12 +43,19 @@ public class BinarySearchPerformance {
     public static void main(String[] args) {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
+      /*  System.out.println("Running first full experiment...");
+        runFullExperiment("ThreeSumFastest-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("ThreeSumFast-Exp1-ThrowAway.txt");
+        runFullExperiment("ThreeSumFastest-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("ThreeSumFast-Exp2.txt");
-        System.out.println("Running first full experiment...");
-        runFullExperiment("ThreeSumFast-Exp3.txt");
+        runFullExperiment("ThreeSumFastest-Exp3.txt"); */
+
+
+        long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
+
+        ThreeSum test = new ThreeSum();
+
+        System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
 
     }
 
@@ -103,7 +110,7 @@ public class BinarySearchPerformance {
 
         ThreeSum test = new ThreeSum();
 
-        System.out.println("Total Triples: " + test.countFast(testList));
+        System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
@@ -180,7 +187,7 @@ public class BinarySearchPerformance {
 
                 ThreeSum test1 = new ThreeSum();
 
-                System.out.println("Total Triples: " + test1.countFast(testList));
+                System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
