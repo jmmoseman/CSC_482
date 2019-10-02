@@ -43,19 +43,19 @@ public class BinarySearchPerformance {
     public static void main(String[] args) {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
-      /*  System.out.println("Running first full experiment...");
+       System.out.println("Running first full experiment...");
         runFullExperiment("ThreeSumFastest-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
         runFullExperiment("ThreeSumFastest-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("ThreeSumFastest-Exp3.txt"); */
+        runFullExperiment("ThreeSumFastest-Exp3.txt");
 
 
-        long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
+      /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
 
         ThreeSum test = new ThreeSum();
 
-        System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
+        System.out.println("Total Triples: " + test.countFastest(testList, testList.length)); */
 
     }
 
@@ -106,7 +106,7 @@ public class BinarySearchPerformance {
 
          */
 
-        long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
+         long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
 
         ThreeSum test = new ThreeSum();
 
