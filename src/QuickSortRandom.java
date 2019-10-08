@@ -8,7 +8,7 @@ public class QuickSortRandom {
 
     // This Function helps in calculating random
     // numbers between low(inclusive) and high(inclusive)
-    int partition_r(long arr[], int low,int high)
+    int partition_r(long arr[], int low, int high)
     {
 
         Random rand= new Random();

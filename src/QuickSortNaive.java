@@ -1,5 +1,5 @@
 public class QuickSortNaive {
-    /* This function takes last element as pivot,
+    /* This function takes last (or first...) element as pivot,
        places the pivot element at its correct
        position in sorted array, and places all
        smaller (smaller than pivot) to left of
@@ -23,7 +23,7 @@ public class QuickSortNaive {
             }
         }
 
-        // swap arr[i+1] and arr[high] (or pivot)
+        // swap arr[i+1] and arr[low] (or pivot)
         long temp = arr[i+1];
         arr[i+1] = arr[high];
         arr[high] = temp;
