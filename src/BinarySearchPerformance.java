@@ -20,9 +20,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 50;
+    static int numberOfTrials = 1;
 
-    static int MAXINPUTSIZE  = (int) Math.pow(2,20);
+    static int MAXINPUTSIZE  = (int) Math.pow(2,6);
 
     static int MININPUTSIZE  =  1;
 
@@ -181,17 +181,19 @@ public class BinarySearchPerformance {
                 // System.gc();
 
 
-                //testList = createRandomIntegerList(inputSize);
+                testList = createRandomIntegerList(inputSize);
 
-               // System.out.println("Unsorted List: " + Arrays.toString(testList));
+                System.out.println("Unsorted List: " + Arrays.toString(testList));
 
-                MergeSort test1 = new MergeSort();
+                InsertionSort test1 = new InsertionSort();
 
                 System.out.println(Arrays.toString(testList));
+                System.out.println("List Sorted? " + verifySorted(testList));
 
-                test1.sort(testList, 0, testList.length-1);
+                test1.sort(testList);
 
-              //  System.out.println("Sorted List: " + Arrays.toString(testList));
+                System.out.println("Sorted List: " + Arrays.toString(testList));
+                System.out.println("List Sorted? " + verifySorted(testList));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
@@ -273,6 +275,24 @@ public class BinarySearchPerformance {
             nums[i] = i;
 
         return nums;
+
+    }
+
+    public static boolean verifySorted(long[] arr) {
+        //Naive method I guess, haha...
+        int tf = 0;
+
+        for (int i = 1; i < (arr.length - 1); i++) {
+            if (arr[i] < arr[i-1]){
+                tf = 1;
+            }
+        }
+
+        if (tf == 0) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
