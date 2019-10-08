@@ -20,9 +20,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 1;
+    static int numberOfTrials = 20;
 
-    static int MAXINPUTSIZE  = (int) Math.pow(2,10);
+    static int MAXINPUTSIZE  = (int) Math.pow(2,20);
 
     static int MININPUTSIZE  =  1;
 
@@ -44,11 +44,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("MergeSort-Exp1-ThrowAway.txt");
+        runFullExperiment("QuickSortNaiveSorted-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("MergeSort-Exp2.txt");
+        runFullExperiment("QuickSortNaiveSorted-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("MergeSort-Exp3.txt");
+        runFullExperiment("QuickSortNaiveSorted-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -161,7 +161,7 @@ public class BinarySearchPerformance {
 
             // stopwatch methods themselves
 
-           // testList = createIntegerList(inputSize);
+            //testList = createIntegerList(inputSize);
 
             BatchStopwatch.start(); // comment this line if timing trials individually
 
@@ -185,9 +185,9 @@ public class BinarySearchPerformance {
                // System.out.println("Unsorted List: " + Arrays.toString(testList));
                // System.out.println("List Sorted? " + verifySorted(testList));
 
-                QuickSortRandom test1 = new QuickSortRandom();
+                BubbleySort test1 = new BubbleySort();
 
-                test1.sort(testList,0,testList.length-1);
+                test1.sort(testList);
 
                 // System.out.println("Sorted List: " + Arrays.toString(testList));
                  // System.out.println("List Sorted? " + verifySorted(testList));
