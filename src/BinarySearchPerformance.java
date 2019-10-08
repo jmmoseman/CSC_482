@@ -20,9 +20,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 12;
+    static int numberOfTrials = 50;
 
-    static int MAXINPUTSIZE  = (int) Math.pow(2,13);
+    static int MAXINPUTSIZE  = (int) Math.pow(2,20);
 
     static int MININPUTSIZE  =  1;
 
@@ -106,11 +106,13 @@ public class BinarySearchPerformance {
 
          */
 
-         long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
+        /*long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
 
         ThreeSum test = new ThreeSum();
 
-        System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
+        System.out.println("Total Triples: " + test.countFastest(testList, testList.length)); */
+
+        long[] testList;
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
@@ -157,7 +159,10 @@ public class BinarySearchPerformance {
 
             // and divide by the number of trials -- this reduces the impact of the amount of time it takes to call the 
 
-            // stopwatch methods themselves 
+            // stopwatch methods themselves
+
+            testList = createIntegerList(inputSize);
+            //testList = createRandomIntegerList(inputSize);
 
             BatchStopwatch.start(); // comment this line if timing trials individually
 
@@ -175,19 +180,18 @@ public class BinarySearchPerformance {
 
                 // System.gc();
 
-                /* testList = createRandomIntegerList(inputSize);
 
-                //  System.out.println(Arrays.toString(testList));
+                //testList = createRandomIntegerList(inputSize);
+
+               // System.out.println("Unsorted List: " + Arrays.toString(testList));
+
                 MergeSort test1 = new MergeSort();
 
-                test1.sort(testList,0, inputSize - 1);
-                ; */
+                System.out.println(Arrays.toString(testList));
 
-                testList = createRandomIntegerList(inputSize);
+                test1.sort(testList, 0, testList.length-1);
 
-                ThreeSum test1 = new ThreeSum();
-
-                System.out.println("Total Triples: " + test.countFastest(testList, testList.length));
+              //  System.out.println("Sorted List: " + Arrays.toString(testList));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
@@ -261,6 +265,16 @@ public class BinarySearchPerformance {
         return newList;
     }
 
+
+    public static long[] createIntegerList (int numssize) {
+
+        long[] nums = new long[numssize];
+        for (int i = 0; i < nums.length; i++)
+            nums[i] = i;
+
+        return nums;
+
+    }
 
     public static long[] createSortedntegerList(int size) {
 
