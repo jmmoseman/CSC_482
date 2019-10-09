@@ -20,9 +20,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 20;
+    static int numberOfTrials = 1;
 
-    static int MAXINPUTSIZE  = (int) Math.pow(2,20);
+    static int MAXINPUTSIZE  = (int) Math.pow(2,10);
 
     static int MININPUTSIZE  =  1;
 
@@ -44,11 +44,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("QuickSortNaiveSorted-Exp1-ThrowAway.txt");
+        runFullExperiment("BubbleSort-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("QuickSortNaiveSorted-Exp2.txt");
+        runFullExperiment("BubbleSort-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("QuickSortNaiveSorted-Exp3.txt");
+        runFullExperiment("BubbleSort-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -161,7 +161,7 @@ public class BinarySearchPerformance {
 
             // stopwatch methods themselves
 
-            //testList = createIntegerList(inputSize);
+            testList = createIntegerList(inputSize);
 
             BatchStopwatch.start(); // comment this line if timing trials individually
 
@@ -182,15 +182,15 @@ public class BinarySearchPerformance {
 
                 testList = createRandomIntegerList(inputSize);
 
-               // System.out.println("Unsorted List: " + Arrays.toString(testList));
-               // System.out.println("List Sorted? " + verifySorted(testList));
+                System.out.println("Unsorted List: " + Arrays.toString(testList));
+                System.out.println("List Sorted? " + verifySorted(testList));
 
-                BubbleySort test1 = new BubbleySort();
+                QuickSortRandom test1 = new QuickSortRandom();
 
-                test1.sort(testList);
+                test1.sort(testList,0,testList.length-1);
 
-                // System.out.println("Sorted List: " + Arrays.toString(testList));
-                 // System.out.println("List Sorted? " + verifySorted(testList));
+                 System.out.println("Sorted List: " + Arrays.toString(testList));
+                 System.out.println("List Sorted? " + verifySorted(testList));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
