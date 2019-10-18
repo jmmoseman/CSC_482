@@ -20,11 +20,11 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 1;
+    static int numberOfTrials = 10;
 
-    static int MAXINPUTSIZE  = (int) Math.pow(2,10);
+    static int MAXINPUTSIZE  = 50; //(int) Math.pow(2,6);
 
-    static int MININPUTSIZE  =  1;
+    static int MININPUTSIZE  =  0;
 
     // static int SIZEINCREMENT =  10000000; // not using this since we are doubling the size each time 
 
@@ -44,11 +44,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("BubbleSort-Exp1-ThrowAway.txt");
+        runFullExperiment("FibRecurDP-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BubbleSort-Exp2.txt");
+        runFullExperiment("FibRecurDP-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BubbleSort-Exp3.txt");
+        runFullExperiment("FibRecurDP-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -116,7 +116,7 @@ public class BinarySearchPerformance {
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-        for(int inputSize=MININPUTSIZE;inputSize<=MAXINPUTSIZE; inputSize*=2) {
+        for(int inputSize=MININPUTSIZE;inputSize<=MAXINPUTSIZE; inputSize+=1) {
 
             // progress message... 
 
@@ -180,17 +180,17 @@ public class BinarySearchPerformance {
                 // System.gc();
 
 
-                testList = createRandomIntegerList(inputSize);
+              //  testList = createRandomIntegerList(inputSize);
 
-                System.out.println("Unsorted List: " + Arrays.toString(testList));
-                System.out.println("List Sorted? " + verifySorted(testList));
+            //    System.out.println("Unsorted List: " + Arrays.toString(testList));
+            //    System.out.println("List Sorted? " + verifySorted(testList));
 
-                QuickSortRandom test1 = new QuickSortRandom();
+                Fibonacci test1 = new Fibonacci();
 
-                test1.sort(testList,0,testList.length-1);
+                test1.fibRecurDP(inputSize, inputSize);
 
-                 System.out.println("Sorted List: " + Arrays.toString(testList));
-                 System.out.println("List Sorted? " + verifySorted(testList));
+          //       System.out.println("Sorted List: " + Arrays.toString(testList));
+           //      System.out.println("List Sorted? " + verifySorted(testList));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
