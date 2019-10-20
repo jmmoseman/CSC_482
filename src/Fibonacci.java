@@ -4,9 +4,6 @@
 // OH GOD THE GNUPLOT OUTPUTS FOR 500 trial / 5000 N EXPERIMENTS GAVE ME FLASHBACKS TO THIS STUFF: https://tinyurl.com/y6n2dllf
 // Sorry...
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class Fibonacci {
     // results cache for fibrecurDP version
     public static long[] FibResultsCache;
