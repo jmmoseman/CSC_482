@@ -3,7 +3,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 
 import java.io.*;
-import java.util.Arrays;
 
 
 public class BinarySearchPerformance {
