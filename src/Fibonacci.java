@@ -1,6 +1,10 @@
 // Did a quick google search on this subject, and of course this was the first page to show up:
 // https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/ Might as well shamelessly copy what's applicable...
 
+// OH GOD THE GNUPLOT OUTPUTS FOR 500 trial / 5000 N EXPERIMENTS GAVE ME FLASHBACKS TO THIS STUFF: https://tinyurl.com/y6n2dllf
+// Sorry...
+
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Fibonacci {
@@ -13,17 +17,14 @@ public class Fibonacci {
             return n;
         return fibRecur(n-1) + fibRecur(n-2);
     }
-
-    public long fibRecurDP(long n, long m) {
+    // DP recursive version
+    public long fibRecurDP(long n, int m) {
         //wipe results cache
         FibResultsCache = null;
         //increment size +1 to avoid out of bounds
         m++;
-        // assign length to cache
-        FibResultsCache = new long[(int)m];
-        // fill with null (-1) values for each call
-        for(int i = 0; i < m; i++)
-            FibResultsCache[i] = -1;
+        // assign length to cache. Initialized to 0 automatically.
+        FibResultsCache = new long[m];
 
         // call & return result from main recursive function
         return fibRecurDPFunc(n);
@@ -33,8 +34,8 @@ public class Fibonacci {
         long result = n;
         if (n <= 1) {
             return result;
-            // check and see if result for current number is in cache (not -1)
-        } else if (FibResultsCache[(int)n] > -1) {
+            // check and see if result for current number is in cache (not 0)
+        } else if (FibResultsCache[(int)n] > 0) {
             result = FibResultsCache[(int)n];
             return result;
         } else {
@@ -46,8 +47,47 @@ public class Fibonacci {
 
     }
 
+    /* function that returns nth Fibonacci number. Sophisticated matrix solution found on the "geeks" site */
 
-        static long fibLoop(int n) {
+    static long fibMatrix(long n)
+    {
+        long F[][] = new long[][]{{1,1},{1,0}};
+        if (n == 0)
+            return 0;
+        power(F, n-1);
+
+        return F[0][0];
+    }
+
+    static void multiply(long F[][], long M[][])
+    {
+        long x =  F[0][0]*M[0][0] + F[0][1]*M[1][0];
+        long y =  F[0][0]*M[0][1] + F[0][1]*M[1][1];
+        long z =  F[1][0]*M[0][0] + F[1][1]*M[1][0];
+        long w =  F[1][0]*M[0][1] + F[1][1]*M[1][1];
+
+        F[0][0] = x;
+        F[0][1] = y;
+        F[1][0] = z;
+        F[1][1] = w;
+    }
+
+    /* Optimized version of power() in method 4 */
+    static void power(long F[][], long n)
+    {
+        if( n == 0 || n == 1)
+            return;
+        long M[][] = new long[][]{{1,1},{1,0}};
+
+        power(F, n/2);
+        multiply(F, F);
+
+        if (n%2 != 0)
+            multiply(F, M);
+    }
+
+
+    static long fibLoop(int n) {
         /* Declare an array to store Fibonacci numbers. */
         long f[] = new long[n+2]; // 1 extra to handle case, n = 0
         int i;
