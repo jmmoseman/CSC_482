@@ -15,31 +15,29 @@ public class Fibonacci {
         return fibRecur(n-1) + fibRecur(n-2);
     }
     // DP recursive version
-    public long fibRecurDP(long n, int m) {
+    public long fibRecurDP(int n, int m) {
         //wipe results cache
-        FibResultsCache = null;
+        //FibResultsCache = null;
         //increment size +1 to avoid out of bounds
-        m++;
+        //m++;
         // assign length to cache. Initialized to 0 automatically.
-        FibResultsCache = new long[m];
+        FibResultsCache = new long[m+1];
 
         // call & return result from main recursive function
         return fibRecurDPFunc(n);
     }
 
-    static long fibRecurDPFunc(long n) {
-        long result = n;
+    static long fibRecurDPFunc(int n) {
         if (n <= 1) {
-            return result;
+            return n;
             // check and see if result for current number is in cache (not 0)
-        } else if (FibResultsCache[(int)n] > 0) {
-            result = FibResultsCache[(int)n];
-            return result;
+        } else if (FibResultsCache[n] > 0) {
+            return FibResultsCache[n];
         } else {
-       result = fibRecurDPFunc(n-1) + fibRecurDPFunc(n-2);
+       //long result = fibRecurDPFunc(n-1) + fibRecurDPFunc(n-2);
        // put result into cache
-       FibResultsCache[(int)n] = result;
-       return result;
+       return FibResultsCache[n] = fibRecurDPFunc(n-1) + fibRecurDPFunc(n-2);
+       //return result;
      }
 
     }

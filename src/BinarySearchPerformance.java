@@ -21,7 +21,7 @@ public class BinarySearchPerformance {
 
     static int numberOfTrials = 500;
 
-    static int MAXINPUTSIZE  = 5000; //(int) Math.pow(2,6);
+    static int MAXINPUTSIZE  = 5000;//(int) Math.pow(2,6);
 
     static int MININPUTSIZE  =  0;
 
@@ -43,11 +43,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("FibLoop500-5000(excel)-Exp1-ThrowAway.txt");
+        runFullExperiment("FibRecurDP500-5000(excel)-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibLoop500-5000(excel)-Exp2.txt");
+        runFullExperiment("FibRecurDP500-5000(excel)-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibLoop500-5000(excel)-Exp3.txt");
+        runFullExperiment("FibRecurDP500-5000(excel)-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -160,7 +160,9 @@ public class BinarySearchPerformance {
 
             // stopwatch methods themselves
 
-            testList = createIntegerList(inputSize);
+           // testList = createIntegerList(inputSize);
+
+            Fibonacci test1 = new Fibonacci();
 
             BatchStopwatch.start(); // comment this line if timing trials individually
 
@@ -184,9 +186,8 @@ public class BinarySearchPerformance {
             //    System.out.println("Unsorted List: " + Arrays.toString(testList));
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
-                Fibonacci test1 = new Fibonacci();
 
-                test1.fibLoop(inputSize);
+                test1.fibRecurDP(inputSize,inputSize);
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -204,7 +205,7 @@ public class BinarySearchPerformance {
 
             batchElapsedTime = BatchStopwatch.elapsedTime(); // *** comment this line if timing trials individually 
 
-            double averageTimePerTrialInBatch = (double) batchElapsedTime / (double)numberOfTrials; // calculate the average time per trial in this batch 
+            double averageTimePerTrialInBatch = (double) batchElapsedTime / (double)numberOfTrials; // calculate the average time per trial in this batch
 
 
 
