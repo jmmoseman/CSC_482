@@ -21,7 +21,7 @@ public class BinarySearchPerformance {
 
     static int numberOfTrials = 500;
 
-    static int MAXINPUTSIZE  = 5000;//(int) Math.pow(2,6);
+    static int MAXINPUTSIZE  = 93;//(int) Math.pow(2,6);
 
     static int MININPUTSIZE  =  0;
 
@@ -43,11 +43,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP500-5000(excel)-Exp1-ThrowAway.txt");
+        runFullExperiment("FibRecurDP-X-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP500-5000(excel)-Exp2.txt");
+        runFullExperiment("FibRecurDP-X-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP500-5000(excel)-Exp3.txt");
+        runFullExperiment("FibRecurDP-X-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -86,7 +86,7 @@ public class BinarySearchPerformance {
 
 
 
-        resultsWriter.println("#InputSize    AverageTime"); // # marks a comment in gnuplot data 
+        resultsWriter.println("#ValueSize    AverageTime"); // # marks a comment in gnuplot data
 
         resultsWriter.flush();
 
@@ -187,7 +187,7 @@ public class BinarySearchPerformance {
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
 
-                test1.fibRecurDP(inputSize,inputSize);
+                test1.fibRecurDP(inputSize);
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -211,9 +211,9 @@ public class BinarySearchPerformance {
 
             /* print data for this size of input */
 
-            //resultsWriter.printf("%12d  %15.2f \n",inputSize, averageTimePerTrialInBatch); // might as well make the columns look nice
+            resultsWriter.printf("%12d  %15.2f \n",test1.fibRecurDP(inputSize), averageTimePerTrialInBatch); // might as well make the columns look nice
             // modified for easier importing to excel...
-            resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
+            //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 
 
             resultsWriter.flush();

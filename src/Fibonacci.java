@@ -15,13 +15,13 @@ public class Fibonacci {
         return fibRecur(n-1) + fibRecur(n-2);
     }
     // DP recursive version
-    public long fibRecurDP(int n, int m) {
+    public long fibRecurDP(int n) {
         //wipe results cache
         //FibResultsCache = null;
         //increment size +1 to avoid out of bounds
         //m++;
         // assign length to cache. Initialized to 0 automatically.
-        FibResultsCache = new long[m+1];
+        FibResultsCache = new long[n+1];
 
         // call & return result from main recursive function
         return fibRecurDPFunc(n);
