@@ -19,9 +19,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 5;
+    static int numberOfTrials = 5000;
 
-    static int MAXINPUTSIZE  = 50;
+    static int MAXINPUTSIZE  = 150;
 
     static int MININPUTSIZE  =  1;
 
@@ -43,11 +43,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("BigInt-Exp1-ThrowAway.txt");
-     //   System.out.println("Running first full experiment...");
-     //   runFullExperiment("FibMatrix500-5000-Exp2.txt");
-     //   System.out.println("Running first full experiment...");
-     //   runFullExperiment("FibMatrix500-5000-Exp3.txt");
+        runFullExperiment("BigIntPlus-Exp1-ThrowAway.txt");
+        System.out.println("Running first full experiment...");
+        runFullExperiment("BigIntPlus-Exp2.txt");
+        System.out.println("Running first full experiment...");
+        runFullExperiment("BigIntPlus-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -115,7 +115,7 @@ public class BinarySearchPerformance {
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-        for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 10))) {
+        for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 9))) {
             // progress message...
 
             System.out.println("Running test for calculation "+inputSize+" + " + inputSize2+ " ... ");
@@ -218,7 +218,7 @@ public class BinarySearchPerformance {
             resultsWriter.flush();
 
             System.out.println(" ....done.");
-            inputSize2+= String.valueOf((int)(Math.random() * 10));
+            inputSize2+= String.valueOf((int)(Math.random() * 9));
 
         }
 
