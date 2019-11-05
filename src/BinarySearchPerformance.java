@@ -19,11 +19,11 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 500;
+    static int numberOfTrials = 5;
 
-    static int MAXINPUTSIZE  = 93;//(int) Math.pow(2,6);
+    static int MAXINPUTSIZE  = 50;
 
-    static int MININPUTSIZE  =  0;
+    static int MININPUTSIZE  =  1;
 
     // static int SIZEINCREMENT =  10000000; // not using this since we are doubling the size each time 
 
@@ -43,11 +43,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP-X-Exp1-ThrowAway.txt");
-        System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP-X-Exp2.txt");
-        System.out.println("Running first full experiment...");
-        runFullExperiment("FibRecurDP-X-Exp3.txt");
+        runFullExperiment("BigInt-Exp1-ThrowAway.txt");
+     //   System.out.println("Running first full experiment...");
+     //   runFullExperiment("FibMatrix500-5000-Exp2.txt");
+     //   System.out.println("Running first full experiment...");
+     //   runFullExperiment("FibMatrix500-5000-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -86,7 +86,7 @@ public class BinarySearchPerformance {
 
 
 
-        resultsWriter.println("#ValueSize    AverageTime"); // # marks a comment in gnuplot data
+        resultsWriter.println("#Calculation  AverageTime"); // # marks a comment in gnuplot data
 
         resultsWriter.flush();
 
@@ -111,15 +111,14 @@ public class BinarySearchPerformance {
 
         System.out.println("Total Triples: " + test.countFastest(testList, testList.length)); */
 
-        long[] testList;
+        //long[] testList;
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-        for(int inputSize=MININPUTSIZE;inputSize<=MAXINPUTSIZE; inputSize+=1) {
+        for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 10))) {
+            // progress message...
 
-            // progress message... 
-
-            System.out.println("Running test for input size "+inputSize+" ... ");
+            System.out.println("Running test for calculation "+inputSize+" + " + inputSize2+ " ... ");
 
 
 
@@ -162,7 +161,7 @@ public class BinarySearchPerformance {
 
            // testList = createIntegerList(inputSize);
 
-            Fibonacci test1 = new Fibonacci();
+            MyBigIntegers test1 = new MyBigIntegers();
 
             BatchStopwatch.start(); // comment this line if timing trials individually
 
@@ -186,8 +185,7 @@ public class BinarySearchPerformance {
             //    System.out.println("Unsorted List: " + Arrays.toString(testList));
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
-
-                test1.fibRecurDP(inputSize);
+                test1.MBIPlus(inputSize,inputSize2);
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -211,7 +209,8 @@ public class BinarySearchPerformance {
 
             /* print data for this size of input */
 
-            resultsWriter.printf("%12d  %15.2f \n",test1.fibRecurDP(inputSize), averageTimePerTrialInBatch); // might as well make the columns look nice
+           // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
+            resultsWriter.printf("%12s %15.2f \n", test1.MBIPlus(inputSize,inputSize2), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 
@@ -219,6 +218,7 @@ public class BinarySearchPerformance {
             resultsWriter.flush();
 
             System.out.println(" ....done.");
+            inputSize2+= String.valueOf((int)(Math.random() * 10));
 
         }
 
