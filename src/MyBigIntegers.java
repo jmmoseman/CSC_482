@@ -143,9 +143,7 @@ public class MyBigIntegers {
               break;
           } else if (plusLen1 == 1 || plusLen2 == 1) {
               sb.insert(0,resultArray[0][plusLen-1]);
-              if (plusLen == 1) {
-                  break;
-              }
+              if (plusLen == 1) break;
           }
           else if (count == checkCount) {
               intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
@@ -169,14 +167,10 @@ public class MyBigIntegers {
           plusLen--;
           if (plusLen <= 0) {
               count--;
-              if (count != 0) {
-                  plusLen = tmp;
-              }
+              if (count != 0) plusLen = tmp;
           }
       }
 
-        String result = sb.toString();
-
-        return result;
+        return sb.toString();
     }
 }
