@@ -91,7 +91,6 @@ public class MyBigIntegers {
         if (plusLen1 == 1 && plusLen2 == 1) {
             resultArray[0][0] = n1Array[0] * n2Array[0];
         } else {
-
             for (int i = plusLen2 - 1; i >= 0; i--) {
                 int j = i;
                 int c = 0;
@@ -100,12 +99,10 @@ public class MyBigIntegers {
                  j--;
                  c++;
                 }
-
                 carry = 0;
                 if (i != plusLen2 - 1) {
                     count++;
                 }
-
                 for (int k = plusLen1 - 1; k >= 0; k--) {
                     if (n1.length() < n2.length()) {
                         intResult = carry + (n1Array[i] * n2Array[k]);
@@ -143,7 +140,9 @@ public class MyBigIntegers {
               break;
           } else if (plusLen1 == 1 || plusLen2 == 1) {
               sb.insert(0,resultArray[0][plusLen-1]);
-              if (plusLen == 1) break;
+              if (plusLen == 1) {
+                  break;
+              }
           }
           else if (count == checkCount) {
               intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
@@ -167,9 +166,12 @@ public class MyBigIntegers {
           plusLen--;
           if (plusLen <= 0) {
               count--;
-              if (count != 0) plusLen = tmp;
+              if (count != 0) {
+                  plusLen = tmp;
+              }
           }
       }
+
 
         return sb.toString();
     }
