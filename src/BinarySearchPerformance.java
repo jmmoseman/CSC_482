@@ -118,7 +118,7 @@ public class BinarySearchPerformance {
         for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 9))) {
             // progress message...
 
-            System.out.println("Running test for calculation "+inputSize+" + " + inputSize2+ " ... ");
+            System.out.println("Running test for calculation "+inputSize+" * " + inputSize2+ " ... ");
 
 
 
@@ -185,7 +185,7 @@ public class BinarySearchPerformance {
             //    System.out.println("Unsorted List: " + Arrays.toString(testList));
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
-                test1.MBIMult("86336","792522341");
+                test1.MBIMult(inputSize,inputSize2);
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -210,7 +210,7 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", test1.MBIPlus(inputSize,inputSize2), averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", test1.MBIMult(inputSize,inputSize2), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 

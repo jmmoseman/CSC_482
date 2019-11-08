@@ -57,8 +57,8 @@ public class MyBigIntegers {
         return sb.toString();
     }
 
-    // There is something amiss with this function, the results aren't always correct... It  does seem to work
-    // More often than not though. Some bug somewhere...
+    // Minor error on this (sometimes puts a leading 0 in front of result??). Think I have most of the kinks
+    // Worked out though...
     static String MBIMult(String n1, String n2) {
         // initialize arrays for length of inputs
 
@@ -84,7 +84,7 @@ public class MyBigIntegers {
 
         int carry;
         int count = 0;
-        int intResult;
+        int intResult = 0;
         int[][] resultArray = new int[plusLen2][(plusLen1 + plusLen2)];
         StringBuilder sb = new StringBuilder();
 
@@ -96,7 +96,7 @@ public class MyBigIntegers {
                 int j = i;
                 int c = 0;
                 while (j > 0) {
-                    resultArray[count][0+c] = 0;
+                    resultArray[count][c] = 0;
                  j--;
                  c++;
                 }
@@ -139,12 +139,13 @@ public class MyBigIntegers {
       while(plusLen > 0) {
 
           if (plusLen1 == 1 && plusLen2 == 1) {
-              if (resultArray[count][plusLen-1] < 10) {
-                  sb.insert(0, resultArray[count][plusLen - 1]);
+              sb.insert(0, resultArray[0][0]);
+              break;
+          } else if (plusLen1 == 1 || plusLen2 == 1) {
+              sb.insert(0,resultArray[0][plusLen-1]);
+              if (plusLen == 1) {
                   break;
               }
-              sb.insert(0, resultArray[count][plusLen-1]);
-              break;
           }
           else if (count == checkCount) {
               intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
