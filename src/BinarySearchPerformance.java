@@ -25,7 +25,7 @@ public class BinarySearchPerformance {
 
     static int MININPUTSIZE  =  1;
 
-    // static int SIZEINCREMENT =  10000000; // not using this since we are doubling the size each time 
+    // static int SIZEINCREMENT =  10000000; // not using this since we are doubling the size each time
 
 
 
@@ -42,7 +42,7 @@ public class BinarySearchPerformance {
     public static void main(String[] args) {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
-       System.out.println("Running first full experiment...");
+        System.out.println("Running first full experiment...");
         runFullExperiment("BigIntMult-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
         runFullExperiment("BigIntMult-Exp2.txt");
@@ -74,15 +74,15 @@ public class BinarySearchPerformance {
 
             System.out.println("*****!!!!!  Had a problem opening the results file "+ResultsFolderPath+resultsFileName);
 
-            return; // not very foolproof... but we do expect to be able to create/open the file... 
+            return; // not very foolproof... but we do expect to be able to create/open the file...
 
         }
 
 
 
-        ThreadCpuStopWatch BatchStopwatch = new ThreadCpuStopWatch(); // for timing an entire set of trials 
+        ThreadCpuStopWatch BatchStopwatch = new ThreadCpuStopWatch(); // for timing an entire set of trials
 
-        ThreadCpuStopWatch TrialStopwatch = new ThreadCpuStopWatch(); // for timing an individual trial 
+        ThreadCpuStopWatch TrialStopwatch = new ThreadCpuStopWatch(); // for timing an individual trial
 
 
 
@@ -126,17 +126,17 @@ public class BinarySearchPerformance {
 
             long batchElapsedTime = 0;
 
-            // generate a list of randomly spaced integers in ascending sorted order to use as test input 
+            // generate a list of randomly spaced integers in ascending sorted order to use as test input
 
-            // In this case we're generating one list to use for the entire set of trials (of a given input size) 
+            // In this case we're generating one list to use for the entire set of trials (of a given input size)
 
-            // but we will randomly generate the search key for each trial 
+            // but we will randomly generate the search key for each trial
 
-           // System.out.print("    Presorted list...");
+            // System.out.print("    Presorted list...");
 
             //long[] testList = createSortedntegerList(inputSize);
 
-         //   System.out.print("    MergeSorted list...");
+            //   System.out.print("    MergeSorted list...");
 
             //System.out.println(Arrays.toString(testList));
             //System.out.println("...done.");
@@ -153,13 +153,13 @@ public class BinarySearchPerformance {
 
 
 
-            // instead of timing each individual trial, we will time the entire set of trials (for a given input size) 
+            // instead of timing each individual trial, we will time the entire set of trials (for a given input size)
 
-            // and divide by the number of trials -- this reduces the impact of the amount of time it takes to call the 
+            // and divide by the number of trials -- this reduces the impact of the amount of time it takes to call the
 
             // stopwatch methods themselves
 
-           // testList = createIntegerList(inputSize);
+            // testList = createIntegerList(inputSize);
 
             MyBigIntegers test1 = new MyBigIntegers();
 
@@ -167,11 +167,11 @@ public class BinarySearchPerformance {
 
 
 
-            // run the tirals 
+            // run the tirals
 
             for (long trial = 0; trial < numberOfTrials; trial++) {
 
-                // generate a random key to search in the range of a the min/max numbers in the list 
+                // generate a random key to search in the range of a the min/max numbers in the list
 
                 //long testSearchKey = (long) (0 + Math.random() * (testList[testList.length-1]));
 
@@ -180,15 +180,15 @@ public class BinarySearchPerformance {
                 // System.gc();
 
 
-              //  testList = createRandomIntegerList(inputSize);
+                //  testList = createRandomIntegerList(inputSize);
 
-            //    System.out.println("Unsorted List: " + Arrays.toString(testList));
-            //    System.out.println("List Sorted? " + verifySorted(testList));
+                //    System.out.println("Unsorted List: " + Arrays.toString(testList));
+                //    System.out.println("List Sorted? " + verifySorted(testList));
 
                 test1.MBIMult(inputSize,inputSize2);
 
-          //       System.out.println("Sorted List: " + Arrays.toString(testList));
-           //      System.out.println("List Sorted? " + verifySorted(testList));
+                //       System.out.println("Sorted List: " + Arrays.toString(testList));
+                //      System.out.println("List Sorted? " + verifySorted(testList));
 
 
                 //TrialStopwatch.start(); // *** uncomment this line if timing trials individually
@@ -201,7 +201,7 @@ public class BinarySearchPerformance {
 
             }
 
-            batchElapsedTime = BatchStopwatch.elapsedTime(); // *** comment this line if timing trials individually 
+            batchElapsedTime = BatchStopwatch.elapsedTime(); // *** comment this line if timing trials individually
 
             double averageTimePerTrialInBatch = (double) batchElapsedTime / (double)numberOfTrials; // calculate the average time per trial in this batch
 
@@ -209,7 +209,7 @@ public class BinarySearchPerformance {
 
             /* print data for this size of input */
 
-           // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
+            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
             resultsWriter.printf("%12s %15.2f \n", test1.MBIMult(inputSize,inputSize2), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
@@ -242,7 +242,7 @@ public class BinarySearchPerformance {
 
         while(j-i > 1){
 
-            //resultsWriter.printf("%d %d %d %d %d %d\n",i,k,j, list[0], key, list[list.length-1]); resultsWriter.flush(); 
+            //resultsWriter.printf("%d %d %d %d %d %d\n",i,k,j, list[0], key, list[list.length-1]); resultsWriter.flush();
 
             if (list[k]== key) return k;
 
@@ -313,4 +313,4 @@ public class BinarySearchPerformance {
 
     }
 
-} 
+}

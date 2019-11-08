@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.math.BigInteger;
 
 public class MyBigIntegers {
 
@@ -11,12 +11,12 @@ public class MyBigIntegers {
         int[] n2Array = new int[plusLen2];
 
         // fill array with the number, using substring functions
-        for (int i = plusLen1-1; i >= 0; i--) {
-            n1Array[i] = Integer.parseInt(n1.substring(i, i+1));
+        for (int i = plusLen1 - 1; i >= 0; i--) {
+            n1Array[i] = Integer.parseInt(n1.substring(i, i + 1));
         }
 
-        for (int i = plusLen2-1; i >= 0; i--) {
-            n2Array[i] = Integer.parseInt(n2.substring(i, i+1));
+        for (int i = plusLen2 - 1; i >= 0; i--) {
+            n2Array[i] = Integer.parseInt(n2.substring(i, i + 1));
         }
 
         int carry = 0;
@@ -24,7 +24,7 @@ public class MyBigIntegers {
         StringBuilder sb = new StringBuilder();
 
         // "gradeschool" algorithm
-        for (int i = plusLen1-1, k = plusLen2-1; i >= 0 || k >=0; i--) {
+        for (int i = plusLen1 - 1, k = plusLen2 - 1; i >= 0 || k >= 0; i--) {
             // ^^ cancel loop at either end of array 1 or 2
 
             // if 1 value is larger than the other, just add that + the initial carry that may be leftover
@@ -40,7 +40,7 @@ public class MyBigIntegers {
             // calculate carry value and "truncate" initial result if greater than 9
             if (intResult > 9) {
                 carry = 1;
-                intResult = intResult%10;
+                intResult = intResult % 10;
             } else {
                 carry = 0;
             }
@@ -69,12 +69,12 @@ public class MyBigIntegers {
         int[] n2Array = new int[plusLen2];
 
         // fill array with the number, using substring functions
-        for (int i = plusLen1-1; i >= 0; i--) {
-            n1Array[i] = Integer.parseInt(n1.substring(i, i+1));
+        for (int i = plusLen1 - 1; i >= 0; i--) {
+            n1Array[i] = Integer.parseInt(n1.substring(i, i + 1));
         }
 
-        for (int i = plusLen2-1; i >= 0; i--) {
-            n2Array[i] = Integer.parseInt(n2.substring(i, i+1));
+        for (int i = plusLen2 - 1; i >= 0; i--) {
+            n2Array[i] = Integer.parseInt(n2.substring(i, i + 1));
         }
 
         if (plusLen1 < plusLen2) {
@@ -96,8 +96,8 @@ public class MyBigIntegers {
                 int c = 0;
                 while (j > 0) {
                     resultArray[count][c] = 0;
-                 j--;
-                 c++;
+                    j--;
+                    c++;
                 }
                 carry = 0;
                 if (i != plusLen2 - 1) {
@@ -116,63 +116,89 @@ public class MyBigIntegers {
                         carry = 0;
                     }
 
-                    resultArray[count][c+k+1] = intResult;
+                    resultArray[count][c + k + 1] = intResult;
 
                     if (k == 0 && carry > 0) {
-                        resultArray[count][k+c] = carry;
+                        resultArray[count][k + c] = carry;
                     }
 
                 }
             }
         }
 
-          count = plusLen2-1;
-          int checkCount = count;
-          carry = 0;
-          int tmp = plusLen2 + plusLen1;
-          int plusLen = tmp;
-          int[] tmpResult = new int[tmp];
+        count = plusLen2 - 1;
+        int checkCount = count;
+        carry = 0;
+        int tmp = plusLen2 + plusLen1;
+        int plusLen = tmp;
+        int[] tmpResult = new int[tmp];
 
-      while(plusLen > 0) {
+        while (plusLen > 0) {
 
-          if (plusLen1 == 1 && plusLen2 == 1) {
-              sb.insert(0, resultArray[0][0]);
-              break;
-          } else if (plusLen1 == 1 || plusLen2 == 1) {
-              sb.insert(0,resultArray[0][plusLen-1]);
-              if (plusLen == 1) {
-                  break;
-              }
-          }
-          else if (count == checkCount) {
-              intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
-          } else {
-              intResult = tmpResult[plusLen-1] + resultArray[count - 1][plusLen - 1] + carry;
-          }
+            if (plusLen1 == 1 && plusLen2 == 1) {
+                sb.insert(0, resultArray[0][0]);
+                break;
+            } else if (plusLen1 == 1 || plusLen2 == 1) {
+                sb.insert(0, resultArray[0][plusLen - 1]);
+                if (plusLen == 1) {
+                    break;
+                }
+            } else if (count == checkCount) {
+                intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
+            } else {
+                intResult = tmpResult[plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
+            }
 
-          if (intResult > 9) {
-              carry = 1;
-              intResult = intResult%10;
-          } else {
-              carry = 0;
-          }
+            if (intResult > 9) {
+                carry = 1;
+                intResult = intResult % 10;
+            } else {
+                carry = 0;
+            }
 
-          if (count != 1) {
-              tmpResult[plusLen - 1] = intResult;
-          } else {
-              sb.insert(0, intResult);
-          }
+            if (count != 1) {
+                tmpResult[plusLen - 1] = intResult;
+            } else {
+                sb.insert(0, intResult);
+            }
 
-          plusLen--;
-          if (plusLen <= 0) {
-              count--;
-              if (count != 0) {
-                  plusLen = tmp;
-              }
-          }
-      }
+            plusLen--;
+            if (plusLen <= 0) {
+                count--;
+                if (count != 0) {
+                    plusLen = tmp;
+                }
+            }
+        }
 
 
         return sb.toString();
+    }
+
+    //https://introcs.cs.princeton.edu/java/99crypto/Karatsuba.java.html
+
+    private final static BigInteger ZERO = new BigInteger("0");
+
+    public static BigInteger MBIMultFast(BigInteger x, BigInteger y) {
+
+        // cutoff to brute force
+        int N = Math.max(x.bitLength(), y.bitLength());
+        if (N <= 2000) return x.multiply(y);                // optimize this parameter
+
+        // number of bits divided by 2, rounded up
+        N = (N / 2) + (N % 2);
+
+        // x = a + 2^N b,   y = c + 2^N d
+        BigInteger b = x.shiftRight(N);
+        BigInteger a = x.subtract(b.shiftLeft(N));
+        BigInteger d = y.shiftRight(N);
+        BigInteger c = y.subtract(d.shiftLeft(N));
+
+        // compute sub-expressions
+        BigInteger ac = MBIMultFast(a, c);
+        BigInteger bd = MBIMultFast(b, d);
+        BigInteger abcd = MBIMultFast(a.add(b), c.add(d));
+
+        return ac.add(abcd.subtract(ac).subtract(bd).shiftLeft(N)).add(bd.shiftLeft(2 * N));
     }
 }
