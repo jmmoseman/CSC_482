@@ -185,7 +185,7 @@ public class BinarySearchPerformance {
             //    System.out.println("Unsorted List: " + Arrays.toString(testList));
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
-                test1.MBIPlus(inputSize,inputSize2);
+                test1.MBIMult("2510","12501");
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));
