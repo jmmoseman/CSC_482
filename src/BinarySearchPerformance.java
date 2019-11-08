@@ -43,11 +43,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
        System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntPlus-Exp1-ThrowAway.txt");
+        runFullExperiment("BigIntMult-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntPlus-Exp2.txt");
+        runFullExperiment("BigIntMult-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntPlus-Exp3.txt");
+        runFullExperiment("BigIntMult-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -185,7 +185,7 @@ public class BinarySearchPerformance {
             //    System.out.println("Unsorted List: " + Arrays.toString(testList));
             //    System.out.println("List Sorted? " + verifySorted(testList));
 
-                test1.MBIMult("2510","12501");
+                test1.MBIMult("86336","792522341");
 
           //       System.out.println("Sorted List: " + Arrays.toString(testList));
            //      System.out.println("List Sorted? " + verifySorted(testList));

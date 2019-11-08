@@ -57,6 +57,8 @@ public class MyBigIntegers {
         return sb.toString();
     }
 
+    // There is something amiss with this function, the results aren't always correct... It  does seem to work
+    // More often than not though. Some bug somewhere...
     static String MBIMult(String n1, String n2) {
         // initialize arrays for length of inputs
 
@@ -80,51 +82,71 @@ public class MyBigIntegers {
             plusLen2 = n1.length();
         }
 
-        int carry = 0;
+        int carry;
         int count = 0;
         int intResult;
-        int[][] resultArray = new int[plusLen1][plusLen1 + plusLen2];
+        int[][] resultArray = new int[plusLen2][(plusLen1 + plusLen2)];
         StringBuilder sb = new StringBuilder();
 
-        for (int i = plusLen2-1; i >= 0; i--) {
-            carry = 0;
-            if (i != plusLen2-1) {
-                count++;
-            }
+        if (plusLen1 == 1 && plusLen2 == 1) {
+            resultArray[0][0] = n1Array[0] * n2Array[0];
+        } else {
 
-            for (int k = plusLen1-1; k >= 0; k--) {
-                if (n1.length() < n2.length()) {
-                    intResult = carry + n1Array[i] * n2Array[k];
-                } else {
-                    intResult = carry + n1Array[k] * n2Array[i];
-                }
-                if (intResult > 9) {
-                    carry = (intResult - intResult%10) / 10;
-                    intResult = intResult%10;
-                } else {
-                    carry = 0;
+            for (int i = plusLen2 - 1; i >= 0; i--) {
+                int j = i;
+                int c = 0;
+                while (j > 0) {
+                    resultArray[count][0+c] = 0;
+                 j--;
+                 c++;
                 }
 
-                resultArray[count][k+i] = intResult;
+                carry = 0;
+                if (i != plusLen2 - 1) {
+                    count++;
+                }
 
+                for (int k = plusLen1 - 1; k >= 0; k--) {
+                    if (n1.length() < n2.length()) {
+                        intResult = carry + (n1Array[i] * n2Array[k]);
+                    } else {
+                        intResult = carry + (n1Array[k] * n2Array[i]);
+                    }
+                    if (intResult > 9) {
+                        carry = (intResult - intResult % 10) / 10;
+                        intResult = intResult % 10;
+                    } else {
+                        carry = 0;
+                    }
+
+                    resultArray[count][c+k+1] = intResult;
+
+                    if (k == 0 && carry > 0) {
+                        resultArray[count][k+c] = carry;
+                    }
+
+                }
             }
         }
 
-          int checkCount = 0;
-          if (plusLen2 < plusLen1) {
-              count = plusLen2 - 1;
-              checkCount = plusLen2 - 1;
-          } else {
-              count = plusLen1 - 1;
-              checkCount = plusLen2 - 1;
-          }
+          count = plusLen2-1;
+          int checkCount = count;
           carry = 0;
           int tmp = plusLen2 + plusLen1;
           int plusLen = tmp;
           int[] tmpResult = new int[tmp];
 
       while(plusLen > 0) {
-          if (count == checkCount) {
+
+          if (plusLen1 == 1 && plusLen2 == 1) {
+              if (resultArray[count][plusLen-1] < 10) {
+                  sb.insert(0, resultArray[count][plusLen - 1]);
+                  break;
+              }
+              sb.insert(0, resultArray[count][plusLen-1]);
+              break;
+          }
+          else if (count == checkCount) {
               intResult = resultArray[count][plusLen - 1] + resultArray[count - 1][plusLen - 1] + carry;
           } else {
               intResult = tmpResult[plusLen-1] + resultArray[count - 1][plusLen - 1] + carry;
@@ -152,7 +174,7 @@ public class MyBigIntegers {
           }
       }
 
-        String result = sb.toString().substring(0,(plusLen1+plusLen2-1));
+        String result = sb.toString();
 
         return result;
     }
