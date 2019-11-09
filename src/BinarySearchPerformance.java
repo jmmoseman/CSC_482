@@ -3,6 +3,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
@@ -20,9 +21,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 500;
+    static int numberOfTrials = 5000;
 
-    static int MAXINPUTSIZE  = 5000;
+    static int MAXINPUTSIZE  = 150;
 
     static int MININPUTSIZE  =  1;
 
@@ -44,11 +45,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibFormula-Exp1-ThrowAway.txt");
+        runFullExperiment("BigDifference-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibFormula-Exp2.txt");
+        runFullExperiment("BigDifference-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("FibFormula-Exp3.txt");
+        runFullExperiment("BigDifference-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -116,11 +117,11 @@ public class BinarySearchPerformance {
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-       // for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 9))) {
-        for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
+        for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 9))) {
+        //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
             // progress message...
 
-            System.out.println("Running test for inputSize "+inputSize+"... ");
+            System.out.println("Running test for inputSize "+inputSize+ " (diff) "+inputSize2+"... ");
 
 
 
@@ -190,9 +191,9 @@ public class BinarySearchPerformance {
 
                 //    System.out.println("Unsorted List: " + Arrays.toString(testList));
                 //    System.out.println("List Sorted? " + verifySorted(testList));
-               // BigInteger c = test1.MBIMultFast(ins,ins2);
+                test1.MBIDiff(inputSize,inputSize2);
 
-               test1.fibFormula(inputSize);
+           //    test1.fibFormula(inputSize);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -217,7 +218,7 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
             // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", inputSize, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", test1.MBIDiff(inputSize,inputSize2), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 
@@ -226,7 +227,7 @@ public class BinarySearchPerformance {
 
             System.out.println(" ....done.");
 
-          //  inputSize2+= String.valueOf((int)(Math.random() * 9));
+            inputSize2+= String.valueOf((int)(Math.random() * 9));
 
         }
 
