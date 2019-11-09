@@ -92,14 +92,7 @@ public class MyBigIntegers {
             resultArray[0][0] = n1Array[0] * n2Array[0];
         } else {
             for (int i = plusLen2 - 1; i >= 0; i--) {
-                int j = i;
-                int c = 0;
-                while (j > 0) {
-                    resultArray[count][c] = 0;
-                    j--;
-                    c++;
-                }
-                carry = 0;
+               carry = 0;
                 if (i != plusLen2 - 1) {
                     count++;
                 }
@@ -116,10 +109,10 @@ public class MyBigIntegers {
                         carry = 0;
                     }
 
-                    resultArray[count][c + k + 1] = intResult;
+                    resultArray[count][i + k + 1] = intResult;
 
                     if (k == 0 && carry > 0) {
-                        resultArray[count][k + c] = carry;
+                        resultArray[count][k + i] = carry;
                     }
 
                 }
@@ -177,8 +170,6 @@ public class MyBigIntegers {
 
     //https://introcs.cs.princeton.edu/java/99crypto/Karatsuba.java.html
 
-    private final static BigInteger ZERO = new BigInteger("0");
-
     static BigInteger MBIMultFast(BigInteger x, BigInteger y) {
 
         // cutoff to brute force
@@ -200,5 +191,14 @@ public class MyBigIntegers {
         BigInteger abcd = MBIMultFast(a.add(b), c.add(d));
 
         return ac.add(abcd.subtract(ac).subtract(bd).shiftLeft(N)).add(bd.shiftLeft(2 * N));
+    }
+
+    //https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/ this again...
+
+    static long fibFormula(int n)
+    {
+        double phi = (1 + Math.sqrt(5)) / 2;
+        return (long)Math.round(Math.pow(phi, n)
+                / Math.sqrt(5));
     }
 }
