@@ -179,7 +179,7 @@ public class MyBigIntegers {
 
     private final static BigInteger ZERO = new BigInteger("0");
 
-    public static BigInteger MBIMultFast(BigInteger x, BigInteger y) {
+    static BigInteger MBIMultFast(BigInteger x, BigInteger y) {
 
         // cutoff to brute force
         int N = Math.max(x.bitLength(), y.bitLength());
