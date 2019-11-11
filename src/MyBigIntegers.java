@@ -424,5 +424,8 @@ public class MyBigIntegers {
         return x.multiply(y);
     }
 
+    static BigInteger add(BigInteger x, BigInteger y) {
+        return x.add(y);
+    }
 
 }
