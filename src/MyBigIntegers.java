@@ -168,6 +168,7 @@ public class MyBigIntegers {
             n1Array[i] = Integer.parseInt(n1.substring(i, i + 1));
         }
 
+
         for (int i = plusLen2 - 1; i >= 0; i--) {
             n2Array[i] = Integer.parseInt(n2.substring(i, i + 1));
         }
