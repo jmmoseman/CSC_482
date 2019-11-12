@@ -45,7 +45,7 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFastl-Exp1-ThrowAway.txt");
+        runFullExperiment("BigIntMultFast-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
         runFullExperiment("BigIntMultFast-Exp2.txt");
         System.out.println("Running first full experiment...");
