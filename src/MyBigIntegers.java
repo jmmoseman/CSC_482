@@ -282,9 +282,10 @@ public class MyBigIntegers {
 
         // cutoff to brute force
         int N = Math.max(x.bitLength(), y.bitLength());
-        if (N <= 63) { //This was defaultly 2000 bits....
+        /*if (N <= 63) { //This was defaultly 2000 bits.... Just going to skip it anyways... Makes
+        // Calculating doubling values go way off...
             return x.multiply(y);                // optimize this parameter.
-        }
+        } */
 
         // number of bits divided by 2, rounded up
         N = (N / 2) + (N % 2);
