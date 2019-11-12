@@ -282,7 +282,9 @@ public class MyBigIntegers {
 
         // cutoff to brute force
         int N = Math.max(x.bitLength(), y.bitLength());
-        if (N <= 2000) return x.multiply(y);                // optimize this parameter
+        if (N <= 63) { //This was defaultly 2000 bits....
+            return x.multiply(y);                // optimize this parameter.
+        }
 
         // number of bits divided by 2, rounded up
         N = (N / 2) + (N % 2);
