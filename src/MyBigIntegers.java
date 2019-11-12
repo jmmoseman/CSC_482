@@ -282,8 +282,7 @@ public class MyBigIntegers {
 
         // cutoff to brute force
         int N = Math.max(x.bitLength(), y.bitLength());
-        if (N <= 31) { //This was defaultly 2000 bits.... I suppose this algorithm is best with EXTREMELY large numbers though.
-            // Runs almost as fast as the plain biginteger multiply function below with the defaults...
+        if (N <= 2000) { //This is probably best with EXTREMELY large numbers...
             return x.multiply(y);                // optimize this parameter.
         }
 

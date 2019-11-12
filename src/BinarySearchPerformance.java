@@ -45,11 +45,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Exp1-ThrowAway.txt");
+        runFullExperiment("BigIntMultFast-Excel-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Exp2.txt");
+        runFullExperiment("BigIntMultFast-Excel-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Exp3.txt");
+        runFullExperiment("BigIntMultFast-Excel-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
