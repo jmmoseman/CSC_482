@@ -20,4 +20,6 @@ public class LCS {
         return lcsLen;
     }
 
+    //lcs fast = front and back search. Recursion? (/2...). Make sure to return the actual LCS + length.
+
 }

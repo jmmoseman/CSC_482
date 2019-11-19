@@ -5,6 +5,9 @@ import java.lang.management.ThreadMXBean;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Random;
 
 
 public class BinarySearchPerformance {
@@ -21,9 +24,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 100;
+    static int numberOfTrials = 1;
 
-    static int MAXINPUTSIZE  =  150;
+    static int MAXINPUTSIZE  =  3;
 
     static int MININPUTSIZE  =  1;
 
@@ -45,11 +48,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSBF-worst-Exp1-ThrowAway.txt");
+        runFullExperiment("LCSBF-books-Exp1-ThrowAway.txt");
+       /* System.out.println("Running first full experiment...");
+        runFullExperiment("LCSBF-books-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSBF-worst-Exp2.txt");
-        System.out.println("Running first full experiment...");
-        runFullExperiment("LCSBF-worst-Exp3.txt");
+        runFullExperiment("LCSBF-books-Exp3.txt"); */
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -117,11 +120,35 @@ public class BinarySearchPerformance {
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-        for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+= "a") {
-        //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
-            // progress message...
+        // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-            System.out.println("Running test for inputSize "+inputSize + " = " + inputSize2 + "... ");
+        int i = 1;
+       // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; ) {
+        //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
+        for(String inputSize="",inputSize2 = ""; i<=MAXINPUTSIZE; i++) {
+
+            // progress message...
+            //inputSize = generateRandStringInsert(i);
+            //inputSize2 = generateRandStringInsert(i);
+
+            String content = "";
+            String content1 = "";
+            String filePath = "/home/jeremy/Books/book";
+            try
+            {
+                content = new String ( Files.readAllBytes( Paths.get(filePath+i) ) );
+                content1 = new String ( Files.readAllBytes( Paths.get(filePath+(i+1)) ) );
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            // Make books have no spaces.
+            inputSize = content.replaceAll("\\s+", "");
+            inputSize2 = content1.replaceAll("\\s+", "");
+
+            System.out.println("Running test for book lcs compare "+ i + " = " + (i+1) + "... ");
 
 
 
@@ -197,7 +224,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                test1.LCSBF(inputSize,inputSize2);
+                System.out.println(test1.LCSBF(inputSize,inputSize2));
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -221,8 +248,8 @@ public class BinarySearchPerformance {
 
             /* print data for this size of input */
 
-            resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            //resultsWriter.printf("%12s %15.2f \n", c.toString(), averageTimePerTrialInBatch); // For big ints!
+           // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
+            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 
@@ -231,7 +258,7 @@ public class BinarySearchPerformance {
 
             System.out.println(" ....done.");
 
-           inputSize2+= "a";
+        //   inputSize2+= "a";
 
         }
 
@@ -325,5 +352,57 @@ public class BinarySearchPerformance {
         return newList;
 
     }
+
+    //https://www.baeldung.com/java-random-string Pretty straight forwards when you look at it.
+
+    public static String generateRandString(int size) {
+
+        int leftLimit = 97; // a
+        int rightLimit = 122; // z
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(size);
+
+        for (int i = 0; i < size; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+
+        return buffer.toString();
+    }
+
+    public static String generateRandStringInsert(int size) {
+
+        int leftLimit = 97; // a
+        int rightLimit = 122; // z
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(size);
+
+        for (int i = 0; i < size; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+
+        //https://www.geeksforgeeks.org/insert-a-string-into-another-string-in-java/
+
+        int insert = (int) (random.nextFloat() * size);
+        String secret = "thisisthesecretword!Don'tTellAnybody!";
+        StringBuilder newString = new StringBuilder(size+secret.length());
+
+        for (int i = 0; i < size; i++) {
+            // Insert the original string character
+            // into the new string
+            newString.append(buffer.charAt(i));
+
+            if (i == insert) {
+                // Insert the string to be inserted
+                // into the new string
+                newString.append(secret);
+            }
+        }
+
+            return newString.toString();
+        }
 
 }
