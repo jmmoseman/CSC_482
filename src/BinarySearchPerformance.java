@@ -21,7 +21,7 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 5000;
+    static int numberOfTrials = 100;
 
     static int MAXINPUTSIZE  =  150;
 
@@ -45,11 +45,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Excel-Exp1-ThrowAway.txt");
+        runFullExperiment("LCSBF-worst-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Excel-Exp2.txt");
+        runFullExperiment("LCSBF-worst-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("BigIntMultFast-Excel-Exp3.txt");
+        runFullExperiment("LCSBF-worst-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -117,11 +117,11 @@ public class BinarySearchPerformance {
 
         /* for each size of input we want to test: in this case starting small and doubling the size each time */
 
-        for(String inputSize="3",inputSize2 = "4"; inputSize.length()<=MAXINPUTSIZE; inputSize+= String.valueOf((int)(Math.random() * 9))) {
+        for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+= "a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
             // progress message...
 
-            System.out.println("Running test for inputSize "+inputSize + " * " + inputSize2 + "... ");
+            System.out.println("Running test for inputSize "+inputSize + " = " + inputSize2 + "... ");
 
 
 
@@ -164,12 +164,14 @@ public class BinarySearchPerformance {
 
             // testList = createIntegerList(inputSize);
 
-            MyBigIntegers test1 = new MyBigIntegers();
+            //MyBigIntegers test1 = new MyBigIntegers();
+
+            LCS test1 = new LCS();
 
             //Fibonacci test1 = new Fibonacci();
 
-             BigInteger ins = new BigInteger(inputSize);
-             BigInteger ins2 = new BigInteger(inputSize2);
+            // BigInteger ins = new BigInteger(inputSize);
+            // BigInteger ins2 = new BigInteger(inputSize2);
 
 
             BatchStopwatch.start(); // comment this line if timing trials individually
@@ -195,7 +197,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-              BigInteger c = test1.MBIMultFast(ins,ins2);
+                test1.LCSBF(inputSize,inputSize2);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -215,12 +217,12 @@ public class BinarySearchPerformance {
 
             double averageTimePerTrialInBatch = (double) batchElapsedTime / (double)numberOfTrials; // calculate the average time per trial in this batch
 
-            BigInteger c = test1.MBIMultFast(ins,ins2);
+           // BigInteger c = test1.MBIMultFast(ins,ins2);
 
             /* print data for this size of input */
 
-            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", c.toString(), averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
+            //resultsWriter.printf("%12s %15.2f \n", c.toString(), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
 
@@ -229,7 +231,7 @@ public class BinarySearchPerformance {
 
             System.out.println(" ....done.");
 
-            inputSize2+= String.valueOf((int)(Math.random() * 9));
+           inputSize2+= "a";
 
         }
 
