@@ -48,11 +48,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSOPT-randIns-Exp1-ThrowAway.txt");
+        runFullExperiment("LCSOPT-books-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("LCSOPT-randIns-Exp2.txt");
+        runFullExperiment("LCSOPT-books-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSOPT-randIns-Exp3.txt");
+        runFullExperiment("LCSOPT-books-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -122,16 +122,16 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 15;
-       // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; ) {
+        int i = 1;
+      //  for(String inputSize="b",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="b") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
-        for(String inputSize="",inputSize2 = ""; i<=MAXINPUTSIZE; i++) {
+         for(String inputSize="",inputSize2 = ""; i<=MAXINPUTSIZE; i++) {
 
             // progress message...
-            inputSize = generateRandStringInsert(i);
-            inputSize2 = generateRandStringInsert(i);
+           // inputSize = generateRandStringInsert(i);
+           // inputSize2 = generateRandStringInsert(i);
 
-            /* String content = "";
+             String content = "";
             String content1 = "";
             String filePath = "/home/jeremy/Books/book";
             try
@@ -147,8 +147,8 @@ public class BinarySearchPerformance {
             // Make books have no spaces.
             inputSize = content.replaceAll("\\s+", "");
             inputSize2 = content1.replaceAll("\\s+", "");
-            */
-            System.out.println("Running test for lcs compare "+ inputSize + " = " + inputSize2 + "... ");
+
+            System.out.println("Running test for lcs compare "+ i + " = " + (i+1) + "... ");
 
 
 
@@ -224,7 +224,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                test1.LSCOPT(inputSize,inputSize2);
+                test1.LCSOPT(inputSize,inputSize2);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -249,16 +249,16 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", inputSize.length(), averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
-            System.out.println(test1.LSCOPT(inputSize,inputSize2));
+            System.out.println(test1.LCSOPT(inputSize,inputSize2));
 
             resultsWriter.flush();
 
             System.out.println(" ....done.");
 
-        //   inputSize2+= "a";
+        //    inputSize2+= "a";
 
         }
 
