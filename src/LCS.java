@@ -20,6 +20,27 @@ public class LCS {
         return lcsLen;
     }
 
+    static String LSCOPT(String str1, String str2) {
+        int lcsLen = 0;
+        int k;
+        int start = 0;
+        int i1 = str1.length();
+        int i2 = str2.length();
+
+        for (int i = 0; i < i1; i++) {
+            for (int j = 0; j < i2; j++) {
+                for (k=0; (i+k) < i1 && (j+k) < i2; k++){
+                    if (!str1.substring(i+k,i+k+1).equals(str2.substring(j+k,j+k+1))) break;
+                }
+                if (k > lcsLen) {
+                    start = j;
+                    lcsLen = k;
+                }
+            }
+        }
+
+        return "Length Of LCS: " + String.valueOf(lcsLen) + ", LCS: " + str2.substring(start,lcsLen+start);
+    }
     //lcs fast = front and back search. Recursion? (/2...). Make sure to return the actual LCS + length.
 
 }
