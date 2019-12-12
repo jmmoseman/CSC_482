@@ -27,7 +27,7 @@ public class BinarySearchPerformance {
 
     static int numberOfTrials = 100;
 
-    static int MAXINPUTSIZE  = 150;
+    static int MAXINPUTSIZE  = 40;
 
     static int MININPUTSIZE  =  1;
 
@@ -49,11 +49,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSFast-books-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-BF-Rand-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("LCSFast-books-Exp2.txt");
+        runFullExperiment("TSP-BF-Rand-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("LCSFast-books-Exp3.txt");
+        runFullExperiment("TSP-BF-Rand-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -123,14 +123,20 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 0;
-         //for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
+        int i = 5;
+        // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
-         for(String inputSize="",inputSize2 = ""; i<=MAXINPUTSIZE; i++) {
+         for(; i<=MAXINPUTSIZE; i*=2) {
+
+             double[][] costMatrix = new double[i][i];
+
+             costMatrix = generateRandCostMatrix(i);
+
+             System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
             // progress message...
-           inputSize = generateRandStringInsert(i);
-           inputSize2 = generateRandStringInsert(i);
+      //    inputSize = generateRandString(i);
+      //     inputSize2 = generateRandString(i);
 
            /*  String content = "";
             String content1 = "";
@@ -150,7 +156,7 @@ public class BinarySearchPerformance {
             inputSize2 = content1.replaceAll("\\s+", "");
                     */
 
-            System.out.println("Running test for lcs compare "+ inputSize + " = " + inputSize2 + "... ");
+            System.out.println("Running test TSP with # of nodes: "+ i + "... ");
 
 
 
@@ -195,22 +201,12 @@ public class BinarySearchPerformance {
 
             //MyBigIntegers test1 = new MyBigIntegers();
 
-            LCS test1 = new LCS();
+            Graphs test1 = new Graphs();
 
             //Fibonacci test1 = new Fibonacci();
 
             // BigInteger ins = new BigInteger(inputSize);
             // BigInteger ins2 = new BigInteger(inputSize2);
-
-             int m = inputSize.length();
-             int n = inputSize2.length();
-
-             int dp[][] = new int[m][n+m];
-
-             // assign -1 to all positions
-             for (int[] row : dp) {
-                 Arrays.fill(row, -1);
-             }
 
 
              BatchStopwatch.start(); // comment this line if timing trials individually
@@ -236,7 +232,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                test1.lcsFast(inputSize,inputSize2,m,n,dp);
+                System.out.println("Best Tour: " + test1.BF(costMatrix));
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -261,16 +257,14 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", inputSize.length(), averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
-            System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
+          //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
 
             resultsWriter.flush();
 
             System.out.println(" ....done.");
-
-            //inputSize2+= "a";
 
         }
 
@@ -415,6 +409,55 @@ public class BinarySearchPerformance {
         }
 
             return newString.toString();
+        }
+
+        public static double[][] generateRandCostMatrix(int n) {
+
+        double cost;
+
+        double[][] costMatrix = new double[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                cost = Math.random() * 10;
+
+                if (cost < 4) {
+                    // Don't want too many connections...
+                    cost = 0;
+                } else if (i == j) {
+                    cost = 0;
+                }
+
+                // Undirected of course
+                costMatrix[i][j] = cost;
+                costMatrix[j][i] = cost;
+
+            }
+        }
+
+        return costMatrix;
+        }
+
+
+        //Test function to print out any calculated/randomized cost matrices
+
+        public static String printMatrix(double[][] matrix) {
+
+        StringBuilder costList = new StringBuilder();
+
+        int n = matrix.length;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+
+                  if (i != j) {
+                      costList.append(i).append("'s cost to ").append(j).append(" = ").append(matrix[i][j]).append("\n");
+                  }
+                }
+            }
+
+        return costList.toString();
         }
 
 }
