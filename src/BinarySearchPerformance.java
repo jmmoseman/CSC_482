@@ -5,6 +5,7 @@ import java.lang.management.ThreadMXBean;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 100;
+    static int numberOfTrials = 5;
 
     static int MAXINPUTSIZE  = 40;
 
@@ -132,7 +133,7 @@ public class BinarySearchPerformance {
 
              costMatrix = generateRandCostMatrix(i);
 
-             System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
+           //  System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
             // progress message...
       //    inputSize = generateRandString(i);
@@ -214,6 +215,7 @@ public class BinarySearchPerformance {
 
 
             // run the tirals
+             String TSPreturn = "";
 
             for (long trial = 0; trial < numberOfTrials; trial++) {
 
@@ -232,7 +234,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                System.out.println("Best Tour: " + test1.BF(costMatrix));
+                TSPreturn = "Best Tour: " + test1.BF(costMatrix);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -257,7 +259,7 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
@@ -422,7 +424,7 @@ public class BinarySearchPerformance {
 
                 cost = Math.random() * 10;
 
-                if (cost < 4) {
+                if (cost < 3) {
                     // Don't want too many connections...
                     cost = 0;
                 } else if (i == j) {
