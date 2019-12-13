@@ -3,6 +3,9 @@ import java.util.Arrays;
 public class Graphs {
 
     // This one was 100% implemented myself. I guess it works... SLOOOW of course...
+    // Can't seem to get much past n = 15 or so. 4,6,8,10,12 go pretty fast oddly fast. Anything beyhond that
+    // takes hours, I originally wanted to try up to 40. That'd probably take weeks! Not entirely sure I understand
+    // This behavior. But I'm fairly sure this procedure actually works properly.
 
     String BF(double[][] matrix) {
 
