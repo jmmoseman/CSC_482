@@ -119,7 +119,7 @@ public class Graphs {
         }
 
 
-    return "( " + route + " ) With A Total Cost Of: " + cost;
+    return "( " + route + " With A Total Cost Of: " + cost;
     }
 
     // Dijkstra time! https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
