@@ -11,8 +11,8 @@ public class Graphs {
 
         double cost = 1000;
         double tmpCost = 0.0;
-        String tmpRoute = "";
-        String route = "";
+        StringBuilder tmpRoute = new StringBuilder();
+        StringBuilder route  = new StringBuilder();
 
         // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
 
@@ -28,18 +28,18 @@ public class Graphs {
 
         // Initial loop through the list (1 2 3 ... etc.)
         tmpCost = matrix[0][a[0]];
-        tmpRoute = 0 + ", ";
+        tmpRoute = new StringBuilder(0 + ", ");
 
         // Handle home position by itself, then iterate through the rest.
 
         if (matrix[0][a[0]] != 0.0) {
             for (int j = 0; j < n-1; j++) {
                     tmpCost += matrix[a[j]][a[j+1]];
-                    tmpRoute += a[j] + ", ";
+                    tmpRoute.append(a[j]).append(", ");
 
                     if (matrix[a[j]][a[j+1]] == 0.0) {
                         tmpCost = 0.0;
-                        tmpRoute = "";
+                        tmpRoute = new StringBuilder();
                         break;
                     }
                 }
@@ -49,10 +49,10 @@ public class Graphs {
         if (tmpCost != 0.0) {
             if (matrix[0][a[n - 1]] != 0) {
                 tmpCost += matrix[0][a[n - 1]];
-                tmpRoute += a[n - 1] + ", " + "0 )";
+                tmpRoute.append(a[n - 1]).append(", ").append("0 )");
             } else {
                 tmpCost = 0.0;
-                tmpRoute = "";
+                tmpRoute = new StringBuilder();
             }
         }
 
@@ -78,16 +78,16 @@ public class Graphs {
                 }
 
                 tmpCost = matrix[0][a[0]];
-                tmpRoute = 0 + ", ";
+                tmpRoute = new StringBuilder(0 + ", ");
 
                 if (matrix[0][a[0]] != 0.0) {
                     for (int j = 0; j < n-1; j++) {
                             tmpCost += matrix[a[j]][a[j+1]];
-                            tmpRoute += a[j] + ", ";
+                            tmpRoute.append(a[j]).append(", ");
 
                             if (matrix[a[j]][a[j+1]] == 0.0) {
                                 tmpCost = 0.0;
-                                tmpRoute = "";
+                                tmpRoute = new StringBuilder();
                                 // break off the search through this path if one connection isn't there.
                                 break;
                             }
@@ -97,10 +97,10 @@ public class Graphs {
                 if (tmpCost != 0.0) {
                     if (matrix[0][a[n - 1]] != 0) {
                         tmpCost += matrix[0][a[n - 1]];
-                        tmpRoute += a[n - 1] + ", " + "0 )";
+                        tmpRoute.append(a[n - 1]).append(", ").append("0 )");
                     } else {
                         tmpCost = 0.0;
-                        tmpRoute = "";
+                        tmpRoute = new StringBuilder();
                     }
                 }
 
@@ -119,7 +119,7 @@ public class Graphs {
         }
 
 
-    return "( " + route + " With A Total Cost Of: " + cost;
+    return "( " + route.toString() + " With A Total Cost Of: " + cost;
     }
 
     // Dijkstra time! https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/

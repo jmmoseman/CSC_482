@@ -425,7 +425,7 @@ public class BinarySearchPerformance {
 
                 cost = Math.random() * 10;
 
-                if (cost < 2) {
+                if (cost < 3) {
                     // Don't want too many connections...
                     cost = 0;
                 } else if (i == j) {
