@@ -28,8 +28,7 @@ public class Graphs {
 
 
         // Initial loop through the list (1 2 3 ... etc.)
-        tmpCost = (int)matrix[0][a[0]];
-
+        tmpCost = matrix[0][a[0]];
         // Handle home position by itself, then iterate through the rest.
 
         if (matrix[0][a[0]] != 0) {
@@ -50,7 +49,6 @@ public class Graphs {
             if (matrix[0][a[n - 1]] != 0) {
                 tmpCost += matrix[0][a[n - 1]];
                 tmpRoute[n] = a[n-1];
-                tmpRoute[n+1] = 0;
             } else {
                 tmpCost = 0;
                 tmpRoute = new int[n+2];
@@ -78,7 +76,8 @@ public class Graphs {
                     a[i] = tmp;
                 }
 
-                tmpCost = (int)matrix[0][a[0]];
+                tmpCost = matrix[0][a[0]];
+                tmpRoute = new int[n+2];
 
                 if (matrix[0][a[0]] != 0) {
                     for (int j = 0; j < n-1; j++) {
@@ -94,11 +93,10 @@ public class Graphs {
                     }
                 }
 
-                if (tmpCost != 0.0) {
+                if (tmpCost != 0) {
                     if (matrix[0][a[n - 1]] != 0) {
                         tmpCost += matrix[0][a[n - 1]];
                         tmpRoute[n] = a[n-1];
-                        tmpRoute[n+1] = 0;
                     } else {
                         tmpCost = 0;
                         tmpRoute = new int[n+2];
@@ -120,7 +118,11 @@ public class Graphs {
         }
 
 
-    return Arrays.toString(route) + " With A Total Cost Of: " + cost;
+        if (cost == 150) {
+            return "No Complete Tour Found";
+        } else {
+            return Arrays.toString(route) + " With A Total Cost Of: " + cost;
+        }
     }
 
     // Dijkstra time! https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/

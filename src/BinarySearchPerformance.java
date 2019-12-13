@@ -428,7 +428,9 @@ public class BinarySearchPerformance {
                 if (cost < 3) {
                     // Don't want too many connections...
                     cost = 0;
-                } else if (i == j) {
+                }
+
+                if (i == j) {
                     cost = 0;
                 }
 
