@@ -125,6 +125,9 @@ public class Graphs {
     // I remember struggling to implement this myself in CSC 300, I'll just copy this whole cloth this time
     // And not relive that again, lol. I understood the logic nearly perfectly, I just honestly ain't some super algo coding wiz...
 
+    // Just have to modify it to store the steps. If there's no connections, do I want it to consider for that?
+    // Or just have the algorithm work assuming the graph is full.. hmm. Makes no difference to some of the testing.
+
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
 
