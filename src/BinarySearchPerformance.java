@@ -129,7 +129,7 @@ public class BinarySearchPerformance {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
 
-             double[][] costMatrix = new double[i][i];
+             int[][] costMatrix = new int[i][i];
 
              costMatrix = generateRandCostMatrix(i);
 
@@ -414,11 +414,11 @@ public class BinarySearchPerformance {
         }
 
 
-    public static double[][] generateRandCostMatrix(int n) {
+    public static int[][] generateRandCostMatrix(int n) {
 
         double cost;
 
-        double[][] costMatrix = new double[n][n];
+        int[][] costMatrix = new int[n][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -433,8 +433,8 @@ public class BinarySearchPerformance {
                 }
 
                 // Undirected of course
-                costMatrix[i][j] = cost;
-                costMatrix[j][i] = cost;
+                costMatrix[i][j] = (int)cost;
+                costMatrix[j][i] = (int)cost;
 
             }
         }
@@ -445,7 +445,7 @@ public class BinarySearchPerformance {
 
         //Test function to print out any calculated/randomized cost matrices
 
-    public static String printMatrix(double[][] matrix) {
+    public static String printMatrix(int[][] matrix) {
 
         StringBuilder costList = new StringBuilder();
 
