@@ -18,11 +18,11 @@ public class Graphs {
         int[] tmpRoute = new int[n+2];
         int[] route = new int [n+2];
 
-        int[] indeces = new int[n];
+        int[] indices = new int[n];
         int[] a = new int[n];
 
         for (int i = 0; i < n; i++) {
-            indeces[i] = 0;
+            indices[i] = 0;
             a[i] = i+1;
         }
 
@@ -65,14 +65,14 @@ public class Graphs {
         // After the initial list (1 2 3 4...) Create a permutation, then run the cost search again for each.
 
         while (i < n) {
-            if (indeces[i] < i) {
+            if (indices[i] < i) {
                 if (i % 2 == 0) {
                     int tmp = a[0];
                     a[0] = a[i];
                     a[i] = tmp;
                 } else {
-                    int tmp = a[indeces[i]];
-                    a[indeces[i]] = a[i];
+                    int tmp = a[indices[i]];
+                    a[indices[i]] = a[i];
                     a[i] = tmp;
                 }
 
@@ -108,11 +108,11 @@ public class Graphs {
                     route = tmpRoute;
                 }
 
-                indeces[i]++;
+                indices[i]++;
                 i = 0;
 
             } else {
-                indeces[i] = 0;
+                indices[i] = 0;
                 i += 1;
             }
         }
