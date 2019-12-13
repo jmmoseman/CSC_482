@@ -127,7 +127,7 @@ public class BinarySearchPerformance {
         int i = 4;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
-         for(; i<=MAXINPUTSIZE; i+=2) {
+         for(; i<=MAXINPUTSIZE; i+=1) {
 
              double[][] costMatrix = new double[i][i];
 
@@ -425,7 +425,7 @@ public class BinarySearchPerformance {
 
                 cost = Math.random() * 10;
 
-                if (cost < 3) {
+                if (cost < 2) {
                     // Don't want too many connections...
                     cost = 0;
                 } else if (i == j) {

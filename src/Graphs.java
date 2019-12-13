@@ -3,9 +3,9 @@ import java.util.Arrays;
 public class Graphs {
 
     // This one was 100% implemented myself. I guess it works... SLOOOW of course...
-    // Can't seem to get much past n = 15 or so. 4,6,8,10,12 go pretty fast oddly fast. Anything beyhond that
+    // Can't seem to get much past n = 15 or so. 4,6,8,10,12 go pretty fast, oddly. Anything beyhond that (15 or more)
     // takes hours, I originally wanted to try up to 40. That'd probably take weeks! Not entirely sure I understand
-    // This behavior. But I'm fairly sure this procedure actually works properly.
+    // this behavior (why up to 10 it's fast...). But I'm fairly sure this procedure actually works properly.
 
     String BF(double[][] matrix) {
 
@@ -69,13 +69,11 @@ public class Graphs {
             if (indeces[i] < i) {
                 if (i % 2 == 0) {
                     int tmp = a[0];
-                    int tmp2 = a[i];
-                    a[0] = tmp2;
+                    a[0] = a[i];
                     a[i] = tmp;
                 } else {
                     int tmp = a[indeces[i]];
-                    int tmp2 = a[i];
-                    a[indeces[i]] = tmp2;
+                    a[indeces[i]] = a[i];
                     a[i] = tmp;
                 }
 
@@ -129,7 +127,9 @@ public class Graphs {
     // And not relive that again, lol. I understood the logic nearly perfectly, I just honestly ain't some super algo coding wiz...
 
     // Just have to modify it to store the steps. If there's no connections, do I want it to consider for that?
-    // Or just have the algorithm work assuming the graph is full.. hmm. Makes no difference to some of the testing.
+    // Or just have the algorithm work assuming the graph is full (all nodes connected to each other, like the testing "circle" matrix)
+    // ... hmm. Makes no difference to some of the testing. Even on the BF though, on some random matrices with lower
+    // node counts, there was no tour/walk (w/e you technically call it) at all through the graph...
 
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
