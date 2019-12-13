@@ -28,7 +28,7 @@ public class BinarySearchPerformance {
 
     static int numberOfTrials = 5;
 
-    static int MAXINPUTSIZE  = 40;
+    static int MAXINPUTSIZE  = 14;
 
     static int MININPUTSIZE  =  1;
 
@@ -124,10 +124,10 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 5;
+        int i = 4;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
-         for(; i<=MAXINPUTSIZE; i*=2) {
+         for(; i<=MAXINPUTSIZE; i+=2) {
 
              double[][] costMatrix = new double[i][i];
 
@@ -413,7 +413,8 @@ public class BinarySearchPerformance {
             return newString.toString();
         }
 
-        public static double[][] generateRandCostMatrix(int n) {
+
+    public static double[][] generateRandCostMatrix(int n) {
 
         double cost;
 
@@ -444,7 +445,7 @@ public class BinarySearchPerformance {
 
         //Test function to print out any calculated/randomized cost matrices
 
-        public static String printMatrix(double[][] matrix) {
+    public static String printMatrix(double[][] matrix) {
 
         StringBuilder costList = new StringBuilder();
 
