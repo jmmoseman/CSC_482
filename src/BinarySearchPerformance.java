@@ -50,11 +50,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Rand-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-GreedLG-Rand-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Rand-Exp2.txt");
+        runFullExperiment("TSP-GreedLG-Rand-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Rand-Exp3.txt");
+        runFullExperiment("TSP-GreedLG-Rand-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -234,7 +234,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                TSPreturn = "Best Tour: " + test1.BF(costMatrix);
+                TSPreturn = "Best Tour: " + test1.greedy(costMatrix);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -259,7 +259,7 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
@@ -425,10 +425,12 @@ public class BinarySearchPerformance {
 
                 cost = Math.random() * 10;
 
-                if (cost < 3) {
+                 if (cost < 3) {
                     // Don't want too many connections...
                     cost = 0;
                 }
+
+
 
                 if (i == j) {
                     cost = 0;

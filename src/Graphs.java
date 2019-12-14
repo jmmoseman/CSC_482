@@ -122,5 +122,82 @@ public class Graphs {
         }
     }
 
+    String greedy(int[][] matrix) {
+
+        int cost = 0;
+        int edgeCost;
+
+        String message = " Tour Success. With A Total Cost Of: ";
+
+        boolean inc = false;
+
+        int tmpVisit = 0;
+        int currNode = 0;
+
+        int n = matrix.length;
+        int[] route = new int [n+1];
+
+        boolean[] visited = new boolean[n];
+
+
+        // Simply iterate through the whole graph, finding lowest cost per connection then saving it.
+        // Next iteration just compares all unvisited nodes with the previous lowest cost node.
+
+        for (int i = 0; i < n-1; i++) {
+            edgeCost = 100;
+            for (int j = 0; j < n; j++) {
+
+                if (matrix[tmpVisit][j] != 0) {
+                    if (matrix[tmpVisit][j] < edgeCost && !visited[j]) {
+                        currNode = j;
+                        edgeCost = matrix[tmpVisit][j];
+                    }
+                }
+
+            }
+
+            if (i == 0) {
+                visited[i] = true;
+            }
+
+
+            // There could be some logic for walking back up through the graph, and searching again.
+            // But I'll just leave it like this. Realistically, this probably isn't the WORST thing to do.
+            // Especially when this algorithm is best used on massive graphs.
+
+            if (edgeCost == 100) {
+                inc = true;
+                message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
+                break;
+            }
+
+            tmpVisit = currNode;
+            visited[tmpVisit] = true;
+
+
+            cost += edgeCost;
+            route[i+1] = tmpVisit;
+
+            if (i == n-2) {
+                if (matrix[tmpVisit][0] == 0) {
+                    // If there's no final connection, print special message.
+                    message = " Greed Is A Failure! No Final Path Home. Cost So Far: ";
+                    inc = true;
+                    route[i+2] = -1;
+                } else {
+                    cost += matrix[tmpVisit][0];
+                }
+            }
+
+        }
+
+
+        if (inc) {
+            return Arrays.toString(route) + message + cost;
+        } else {
+            return Arrays.toString(route) + message + cost;
+        }
+    }
+
 
 }
