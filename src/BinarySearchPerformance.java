@@ -1,3 +1,4 @@
+import java.awt.geom.Point2D;
 import java.lang.management.ManagementFactory;
 
 import java.lang.management.ThreadMXBean;
@@ -50,11 +51,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-Rand-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-BF-Circle-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-Rand-Exp2.txt");
+        runFullExperiment("TSP-BF-Circle-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-Rand-Exp3.txt");
+        runFullExperiment("TSP-BF-Circle-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -131,9 +132,9 @@ public class BinarySearchPerformance {
 
              int[][] costMatrix = new int[i][i];
 
-             costMatrix = generateRandCostMatrix(i);
+             costMatrix = generateEuclideanCircle(i);
 
-           //  System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
+             System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
             // progress message...
       //    inputSize = generateRandString(i);
@@ -234,7 +235,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                TSPreturn = "Best Tour: " + test1.greedy(costMatrix);
+                TSPreturn = "Best Tour: " + test1.BF(costMatrix);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
@@ -259,7 +260,7 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
             //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
@@ -413,6 +414,42 @@ public class BinarySearchPerformance {
             return newString.toString();
         }
 
+
+    public static int[][] generateEuclideanCircle(int n) {
+        int[][] costMatrix = new int[n][n];
+
+        double cost = 0;
+
+        double stepAngle = 2*(Math.PI)/n;
+        int radius = 100;
+        double x[] = new double[n];
+        double y[] = new double[n];
+
+        for (int i = 0; i < n; i++) {
+                x[i] = radius * Math.sin(i * stepAngle);
+                y[i] = radius * Math.cos(i * stepAngle);
+
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                cost = Math.round(Point2D.distance(x[i], y[i], x[j], y[j]));
+
+                if (i == j) {
+                    cost = 0;
+                }
+
+                // Undirected of course
+                costMatrix[i][j] = (int)cost;
+                costMatrix[j][i] = (int)cost;
+
+            }
+        }
+
+
+        return costMatrix;
+    }
 
     public static int[][] generateRandCostMatrix(int n) {
 

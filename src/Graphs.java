@@ -164,7 +164,7 @@ public class Graphs {
             // There could be some logic for walking back up through the graph, and searching again.
             // But I'll just leave it like this. Realistically, this probably isn't the WORST thing to do.
             // Especially when this algorithm is probably best used on massive graphs. And on a complete
-            // graph, like the euclidean tests, it will always find a route (and a correct one for the circles).
+            // graph, like the euclidean tests, it will always find a route (and the best one for the circles).
 
             if (edgeCost == 100) {
                 inc = true;
