@@ -134,7 +134,7 @@ public class BinarySearchPerformance {
 
              costMatrix = generateEuclideanCircle(i);
 
-             System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
+             //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
             // progress message...
       //    inputSize = generateRandString(i);
@@ -422,8 +422,8 @@ public class BinarySearchPerformance {
 
         double stepAngle = 2*(Math.PI)/n;
         int radius = 100;
-        double x[] = new double[n];
-        double y[] = new double[n];
+        double[] x = new double[n];
+        double[] y = new double[n];
 
         for (int i = 0; i < n; i++) {
                 x[i] = radius * Math.sin(i * stepAngle);

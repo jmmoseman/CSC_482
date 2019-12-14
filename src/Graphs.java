@@ -6,7 +6,7 @@ public class Graphs {
 
     String BF(int[][] matrix) {
 
-        int cost = 150;
+        int cost = Integer.MAX_VALUE; // Probalby won't ever get that big on a bf, lol...
         int tmpCost = 0;
 
         // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
@@ -144,7 +144,7 @@ public class Graphs {
         // Next iteration just compares all unvisited nodes with the previous lowest cost node.
 
         for (int i = 0; i < n-1; i++) {
-            edgeCost = 100;
+            edgeCost = Integer.MAX_VALUE; // to handle enormous euclidean things... probably paranoid with this.
             for (int j = 0; j < n; j++) {
 
                 if (matrix[tmpVisit][j] != 0) {
