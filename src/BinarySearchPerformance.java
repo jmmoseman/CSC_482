@@ -51,11 +51,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Circle-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-BF-RandEuc-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Circle-Exp2.txt");
+        runFullExperiment("TSP-BF-RandEuc-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-Circle-Exp3.txt");
+        runFullExperiment("TSP-BF-RandEuc-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -132,9 +132,9 @@ public class BinarySearchPerformance {
 
              int[][] costMatrix = new int[i][i];
 
-             costMatrix = generateEuclideanCircle(i);
+             costMatrix = generateRandEuclidean(i);
 
-             //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
+         //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
             // progress message...
       //    inputSize = generateRandString(i);
@@ -451,6 +451,42 @@ public class BinarySearchPerformance {
         return costMatrix;
     }
 
+    public static int[][] generateRandEuclidean(int n) {
+        int[][] costMatrix = new int[n][n];
+
+        double cost = 0;
+
+        int size = 100;
+        double[] x = new double[n];
+        double[] y = new double[n];
+
+        for (int i = 0; i < n; i++) {
+            x[i] = n + (Math.random() * size);
+            y[i] = n + (Math.random() * size);
+
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                cost = Math.round(Point2D.distance(x[i], y[i], x[j], y[j]));
+
+                if (i == j) {
+                    cost = 0;
+                }
+
+                // Undirected of course
+                costMatrix[i][j] = (int)cost;
+                costMatrix[j][i] = (int)cost;
+
+            }
+        }
+
+
+        return costMatrix;
+    }
+
+
     public static int[][] generateRandCostMatrix(int n) {
 
         double cost;
@@ -503,5 +539,5 @@ public class BinarySearchPerformance {
 
         return costList.toString();
         }
-        
+
 }

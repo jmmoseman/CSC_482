@@ -2,14 +2,12 @@ import java.util.Arrays;
 
 public class Graphs {
 
-    // This one was 100% implemented myself. I guess it works...
+    // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
 
     String BF(int[][] matrix) {
 
         int cost = Integer.MAX_VALUE; // Probalby won't ever get that big on a bf, lol...
         int tmpCost = 0;
-
-        // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
 
         int n = matrix.length-1;
         int[] tmpRoute = new int[n+2];
@@ -41,7 +39,7 @@ public class Graphs {
                 }
             }
 
-        // If it doesn't "break;" then compare last in verticies list with home node for final cost.
+        // If it doesn't "break;" then compare last in vertices list with home node for final cost.
         if (tmpCost != 0) {
             if (matrix[0][a[n - 1]] != 0) {
                 tmpCost += matrix[0][a[n - 1]];
@@ -166,7 +164,7 @@ public class Graphs {
             // Especially when this algorithm is probably best used on massive graphs. And on a complete
             // graph, like the euclidean tests, it will always find a route (and the best one for the circles).
 
-            if (edgeCost == 100) {
+            if (edgeCost == Integer.MAX_VALUE) {
                 inc = true;
                 message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
                 break;
