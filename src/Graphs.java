@@ -211,9 +211,6 @@ public class Graphs {
             a[i] = i+1;
         }
 
-       // System.out.println(Arrays.toString(a));
-
-
         // Initial loop through the list (1 2 3 ... etc.)
         tmpCost = matrix[0][a[0]];
         // Handle home position by itself, then iterate through the rest.
@@ -265,11 +262,11 @@ public class Graphs {
 
                 // Works with this code's logic for permutations.
                 // Every time the last number in the list is changed, it
-                // Changes the "lst" variable to it, and adds it to a hash
-                // List, which then is compared every permutation to see if it has been
-                // Done yet. Obviously if the number is in the list, then every possibility has
-                // happened for that number. So, this skips 1/2 of the iterations for the
-                // graph traversal loop below.
+                // changes the "lst" variable to it, and adds it to a hashlist,
+                // which then is compared every permutation to see if it has been
+                // done yet. Obviously if the number is in the list, then every possibility has
+                // happened for that number being first. So, this skips 1/2 of the iterations for the
+                // graph traversal loop below. A good 30%+ speedup it looks like!
 
                 if(a[n-1] != lst) {
                     lst = a[n - 1];
@@ -281,10 +278,6 @@ public class Graphs {
                     i = 0;
                     continue;
                 }
-
-
-
-               // If first == last, skip.
 
                 tmpCost = matrix[0][a[0]];
                 tmpRoute = new int[n+2];
