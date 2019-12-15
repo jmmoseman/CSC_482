@@ -51,11 +51,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-RandEuc-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-DP-RandEuc-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-RandEuc-Exp2.txt");
+        runFullExperiment("TSP-DP-RandEuc-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedLG-RandEuc-Exp3.txt");
+        runFullExperiment("TSP-DP-RandEuc-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -125,7 +125,7 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 4;
+        int i = 13;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
@@ -235,7 +235,9 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                TSPreturn = "Best Tour: " + test1.greedy(costMatrix);
+                TSPreturn = "Best Tour: " + test1.DP(costMatrix);
+             //   System.out.println("BF Version: " + test1.BF(costMatrix));
+                System.out.println("DP Version: " +TSPreturn);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));

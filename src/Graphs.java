@@ -1,4 +1,7 @@
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.util.*;
 
 public class Graphs {
 
@@ -191,7 +194,146 @@ public class Graphs {
 
     String DP(int[][] matrix) {
 
-        return "";
+        int cost = Integer.MAX_VALUE;
+        int tmpCost = 0;
+
+        int n = matrix.length-1;
+        int[] tmpRoute = new int[n+2];
+        int[] route = new int [n+2];
+
+        int[] indices = new int[n];
+        int[] a = new int[n];
+
+        HashSet<Integer> h = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            indices[i] = 0;
+            a[i] = i+1;
+        }
+
+       // System.out.println(Arrays.toString(a));
+
+
+        // Initial loop through the list (1 2 3 ... etc.)
+        tmpCost = matrix[0][a[0]];
+        // Handle home position by itself, then iterate through the rest.
+
+        if (matrix[0][a[0]] != 0) {
+            for (int j = 0; j < n-1; j++) {
+                tmpCost += matrix[a[j]][a[j+1]];
+                tmpRoute[j+1] = a[j];
+
+                if (matrix[a[j]][a[j+1]] == 0) {
+                    tmpCost = 0;
+                    tmpRoute = new int[n+2];
+                    break;
+                }
+            }
+        }
+
+        // If it doesn't "break;" then compare last in vertices list with home node for final cost.
+        if (tmpCost != 0) {
+            if (matrix[0][a[n - 1]] != 0) {
+                tmpCost += matrix[0][a[n - 1]];
+                tmpRoute[n] = a[n-1];
+            } else {
+                tmpCost = 0;
+                tmpRoute = new int[n+2];
+            }
+        }
+
+        if (tmpCost < cost && tmpCost > 0) {
+            cost = tmpCost;
+            route = tmpRoute;
+        }
+
+        int i = 0;
+        int lst = 0;
+        // After the initial list (1 2 3 4...) Create a permutation, then run the cost search again for each.
+
+        while (i < n) {
+            if (indices[i] < i) {
+                if (i % 2 == 0) {
+                    int tmp = a[0];
+                    a[0] = a[i];
+                    a[i] = tmp;
+                } else {
+                    int tmp = a[indices[i]];
+                    a[indices[i]] = a[i];
+                    a[i] = tmp;
+                }
+
+                // Works with this code's logic for permutations.
+                // Every time the last number in the list is changed, it
+                // Changes the "lst" variable to it, and adds it to a hash
+                // List, which then is compared every permutation to see if it has been
+                // Done yet. Obviously if the number is in the list, then every possibility has
+                // happened for that number. So, this skips 1/2 of the iterations for the
+                // graph traversal loop below.
+
+                if(a[n-1] != lst) {
+                    lst = a[n - 1];
+                    h.add(lst);
+                }
+
+                if(h.contains(a[0])) {
+                    indices[i]++;
+                    i = 0;
+                    continue;
+                }
+
+
+
+               // If first == last, skip.
+
+                tmpCost = matrix[0][a[0]];
+                tmpRoute = new int[n+2];
+
+                if (matrix[0][a[0]] != 0) {
+                    for (int j = 0; j < n-1; j++) {
+                        tmpCost += matrix[a[j]][a[j+1]];
+                        tmpRoute[j+1] = a[j];
+
+                        if (matrix[a[j]][a[j+1]] == 0) {
+                            tmpCost = 0;
+                            tmpRoute = new int[n+2];
+                            // break off the search through this path if one connection isn't there.
+                            break;
+                        }
+                    }
+                }
+
+                if (tmpCost != 0) {
+                    if (matrix[0][a[n - 1]] != 0) {
+                        tmpCost += matrix[0][a[n - 1]];
+                        tmpRoute[n] = a[n-1];
+                    } else {
+                        tmpCost = 0;
+                        tmpRoute = new int[n+2];
+                    }
+                }
+
+                if (tmpCost < cost && tmpCost > 0) {
+                    cost = tmpCost;
+                    route = tmpRoute;
+                }
+
+                indices[i]++;
+                i = 0;
+
+            } else {
+
+                indices[i] = 0;
+                i += 1;
+            }
+        }
+
+
+        if (cost == Integer.MAX_VALUE) {
+            return "No Complete Tour Found";
+        } else {
+            return Arrays.toString(route) + " With A Total Cost Of: " + cost;
+        }
     }
 
 
