@@ -113,7 +113,7 @@ public class Graphs {
         }
 
 
-        if (cost == 150) {
+        if (cost == Integer.MAX_VALUE) {
             return "No Complete Tour Found";
         } else {
             return Arrays.toString(route) + " With A Total Cost Of: " + cost;
@@ -170,7 +170,6 @@ public class Graphs {
             tmpVisit = currNode;
             visited[tmpVisit] = true;
 
-
             cost += edgeCost;
             route[i+1] = tmpVisit;
 
@@ -188,6 +187,11 @@ public class Graphs {
 
 
         return Arrays.toString(route) + message + cost;
+    }
+
+    String DP(int[][] matrix) {
+
+        return "";
     }
 
 

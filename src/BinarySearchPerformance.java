@@ -51,11 +51,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-RandEuc-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-GreedLG-RandEuc-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-RandEuc-Exp2.txt");
+        runFullExperiment("TSP-GreedLG-RandEuc-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-BF-RandEuc-Exp3.txt");
+        runFullExperiment("TSP-GreedLG-RandEuc-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -235,7 +235,7 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                TSPreturn = "Best Tour: " + test1.BF(costMatrix);
+                TSPreturn = "Best Tour: " + test1.greedy(costMatrix);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
