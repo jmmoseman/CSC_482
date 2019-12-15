@@ -127,8 +127,6 @@ public class Graphs {
 
         String message = " Tour Success. With A Total Cost Of: ";
 
-        boolean inc = false;
-
         int tmpVisit = 0;
         int currNode = 0;
 
@@ -138,7 +136,7 @@ public class Graphs {
         boolean[] visited = new boolean[n];
 
 
-        // Simply iterate through the whole graph, finding lowest cost per connection then saving it.
+        // Simply iterate through the whole graph, finding the lowest cost node and saving it.
         // Next iteration just compares all unvisited nodes with the previous lowest cost node.
 
         for (int i = 0; i < n-1; i++) {
@@ -165,7 +163,6 @@ public class Graphs {
             // graph, like the euclidean tests, it will always find a route (and the best one for the circles).
 
             if (edgeCost == Integer.MAX_VALUE) {
-                inc = true;
                 message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
                 break;
             }
@@ -181,7 +178,6 @@ public class Graphs {
                 if (matrix[tmpVisit][0] == 0) {
                     // If there's no final connection, print special message.
                     message = " Greed Is A Failure! No Final Path Home. Cost So Far: ";
-                    inc = true;
                     route[i+2] = -1;
                 } else {
                     cost += matrix[tmpVisit][0];
@@ -191,11 +187,7 @@ public class Graphs {
         }
 
 
-        if (inc) {
-            return Arrays.toString(route) + message + cost;
-        } else {
-            return Arrays.toString(route) + message + cost;
-        }
+        return Arrays.toString(route) + message + cost;
     }
 
 
