@@ -251,6 +251,7 @@ public class Graphs {
         int roundCost;
         int roundCost1;
         int[] firstRoute;
+        int c;
 
         h.add(lst);
 
@@ -264,11 +265,18 @@ public class Graphs {
 
                 if (matrix[a[j]][a[j+1]] == 0) {
                     roundCost = 0;
+                    firstRoute = new int[n+2];
+                    lst = 0;
                     break;
                 }
             }
-            roundCost += matrix[0][a[n - 1]];
-            firstRoute[n] = a[n - 1];
+            if (roundCost != 0) {
+                roundCost += matrix[0][a[n - 1]];
+                firstRoute[n] = a[n - 1];
+            }
+        } else {
+            roundCost = 0;
+            lst = 0;
         }
 
 
@@ -304,8 +312,21 @@ public class Graphs {
                                 break;
                             }
                         }
-                        roundCost += matrix[0][a[n - 1]];
-                        firstRoute[n] = a[n - 1];
+                            if (roundCost != 0) {
+                                roundCost += matrix[0][a[n - 1]];
+                                firstRoute[n] = a[n - 1];
+                            } else {
+                                indices[i]++;
+                                i = 0;
+                                lst = 0;
+                                continue;
+                            }
+
+                    } else {
+                        indices[i]++;
+                        i = 0;
+                        lst = 0;
+                        continue;
                     }
                 }
 
@@ -319,9 +340,9 @@ public class Graphs {
                     continue;
                 }
 
-                if (roundCost != 0) {
 
-                    int c = 0;
+                    c = 0;
+
                     for (int l = n-1; l > 0; l--) {
                         if (firstRoute[l+1] == a[l]) {
                             c++;
@@ -356,9 +377,9 @@ public class Graphs {
                     if (tmpCost < cost && tmpCost > 0) {
                         cost = tmpCost;
                         route = new int[n + 2];
-                        System.arraycopy(a,0,route,1,n);
+                        System.arraycopy(a,0, route,1, n);
                     }
-                }
+
 
                 indices[i]++;
                 i = 0;
