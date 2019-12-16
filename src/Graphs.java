@@ -195,7 +195,7 @@ public class Graphs {
     String DP(int[][] matrix) {
 
         int cost = Integer.MAX_VALUE;
-        int tmpCost = 0;
+        int tmpCost;
 
         int n = matrix.length-1;
         int[] tmpRoute = new int[n+2];
@@ -245,7 +245,33 @@ public class Graphs {
         }
 
         int i = 0;
-        int lst = 0;
+        int lst = a[n-1];
+
+
+        int roundCost;
+        int roundCost1;
+        int[] firstRoute;
+
+        h.add(lst);
+
+        roundCost = matrix[0][a[0]];
+        firstRoute = new int[n+2];
+
+        if (matrix[0][a[0]] != 0) {
+            for (int j = 0; j < n-1; j++) {
+                roundCost += matrix[a[j]][a[j+1]];
+                firstRoute[j+1] = a[j];
+
+                if (matrix[a[j]][a[j+1]] == 0) {
+                    roundCost = 0;
+                    break;
+                }
+            }
+            roundCost += matrix[0][a[n - 1]];
+            firstRoute[n] = a[n - 1];
+        }
+
+
         // After the initial list (1 2 3 4...) Create a permutation, then run the cost search again for each.
 
         while (i < n) {
@@ -260,55 +286,78 @@ public class Graphs {
                     a[i] = tmp;
                 }
 
-                // Works with this code's logic for permutations.
-                // Every time the last number in the list is changed, it
-                // changes the "lst" variable to it, and adds it to a hashlist,
-                // which then is compared every permutation to see if it has been
-                // done yet. Obviously if the number is in the list, then every possibility has
-                // happened for that number being first. So, this skips 1/2 of the iterations for the
-                // graph traversal loop below. A good 30%+ speedup it looks like!
 
                 if(a[n-1] != lst) {
                     lst = a[n - 1];
                     h.add(lst);
+
+                    roundCost = matrix[0][a[0]];
+                    firstRoute = new int[n+2];
+
+                    if (matrix[0][a[0]] != 0) {
+                        for (int j = 0; j < n-1; j++) {
+                            roundCost += matrix[a[j]][a[j+1]];
+                            firstRoute[j+1] = a[j];
+
+                            if (matrix[a[j]][a[j+1]] == 0) {
+                                roundCost = 0;
+                                break;
+                            }
+                        }
+                        roundCost += matrix[0][a[n - 1]];
+                        firstRoute[n] = a[n - 1];
+                    }
                 }
 
                 if(h.contains(a[0])) {
                     indices[i]++;
                     i = 0;
                     continue;
+                } else if (matrix[0][a[n - 1]] == 0) {
+                    indices[i]++;
+                    i = 0;
+                    continue;
                 }
 
-                tmpCost = matrix[0][a[0]];
-                tmpRoute = new int[n+2];
+                if (roundCost != 0) {
 
-                if (matrix[0][a[0]] != 0) {
-                    for (int j = 0; j < n-1; j++) {
-                        tmpCost += matrix[a[j]][a[j+1]];
-                        tmpRoute[j+1] = a[j];
-
-                        if (matrix[a[j]][a[j+1]] == 0) {
-                            tmpCost = 0;
-                            tmpRoute = new int[n+2];
-                            // break off the search through this path if one connection isn't there.
+                    int c = 0;
+                    for (int l = n-1; l > 0; l--) {
+                        if (firstRoute[l+1] == a[l]) {
+                            c++;
+                        } else {
                             break;
                         }
                     }
-                }
 
-                if (tmpCost != 0) {
-                    if (matrix[0][a[n - 1]] != 0) {
-                        tmpCost += matrix[0][a[n - 1]];
-                        tmpRoute[n] = a[n-1];
-                    } else {
-                        tmpCost = 0;
-                        tmpRoute = new int[n+2];
+                   roundCost1 = roundCost;
+
+                    tmpCost = matrix[0][a[0]];
+                    roundCost1 -= matrix[firstRoute[0]][firstRoute[1]];
+
+                    if (matrix[0][a[0]] != 0) {
+                        for (int j = 0; j < (n - c); j++) {
+                            roundCost1 -= matrix[firstRoute[j+1]][firstRoute[j + 2]];
+                            tmpCost += matrix[a[j]][a[j + 1]];
+
+                            if (matrix[a[j]][a[j + 1]] == 0) {
+                                tmpCost = 0;
+                                // break off the search through this path if one connection isn't there.
+                                break;
+                            }
+                        }
                     }
-                }
 
-                if (tmpCost < cost && tmpCost > 0) {
-                    cost = tmpCost;
-                    route = tmpRoute;
+
+                    if (tmpCost != 0) {
+                        tmpCost += roundCost1;
+                    }
+
+                    if (tmpCost < cost && tmpCost > 0) {
+                        cost = tmpCost;
+                        route = new int[n + 2];
+                        System.arraycopy(a,0,route,1,n);
+                    }
                 }
 
                 indices[i]++;

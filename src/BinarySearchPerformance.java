@@ -125,7 +125,7 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 4;
+        int i = 10;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
@@ -236,8 +236,8 @@ public class BinarySearchPerformance {
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
                 TSPreturn = "Best Tour: " + test1.DP(costMatrix);
-             //   System.out.println("BF Version: " + test1.BF(costMatrix));
-             //   System.out.println("DP Version: " +TSPreturn);
+               System.out.println("BF Version: " + test1.BF(costMatrix));
+                 System.out.println("DP Version: " +TSPreturn);
 
                 //       System.out.println("Sorted List: " + Arrays.toString(testList));
                 //      System.out.println("List Sorted? " + verifySorted(testList));
