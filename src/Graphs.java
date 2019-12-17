@@ -1,11 +1,11 @@
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Graphs {
 
-    // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
+       // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
 
     String BF(int[][] matrix) {
 
@@ -128,7 +128,7 @@ public class Graphs {
         int cost = 0;
         int edgeCost;
 
-        String message = " Tour Success. With A Total Cost Of: ";
+        String message = " With A Total Cost Of: ";
 
         int tmpVisit = 0;
         int currNode = 0;
@@ -160,11 +160,6 @@ public class Graphs {
             }
 
 
-            // There could be some logic for walking back up through the graph, and searching again.
-            // But I'll just leave it like this. Realistically, this probably isn't the WORST thing to do.
-            // Especially when this algorithm is probably best used on massive graphs. And on a complete
-            // graph, like the euclidean tests, it will always find a route (and the best one for the circles).
-
             if (edgeCost == Integer.MAX_VALUE) {
                 message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
                 break;
@@ -188,11 +183,15 @@ public class Graphs {
 
         }
 
-
         return Arrays.toString(route) + message + cost;
     }
 
-    String DP(int[][] matrix) {
+
+    // This thing doesn't really work the way a proper DP algorithm should, even though some of the logic
+    // is correct. It still does some compares for ALL permutations, it only skips for the main graph loop...
+    // And to do less work, there is more work required... Calling it dumb for a reason, haha...
+
+    String DP_Dumb(int[][] matrix) {
 
         int cost = Integer.MAX_VALUE;
         int tmpCost;
@@ -397,6 +396,78 @@ public class Graphs {
         } else {
             return Arrays.toString(route) + " With A Total Cost Of: " + cost;
         }
+    }
+
+    String greedyExaust(int[][] matrix) { // To do...
+
+        // Search through all costs, store in list sorted from least to most.
+        // Store costs with edges associated with them. (array of 2d arrays? Cost being the sortable key for the edges. Or some adt...).
+        // Search through and put in order of best (start at beginning of array/list), until you have a list that = N (original matrix size) items.
+        // Ignore identical nodes etc. (8->3 is added, 4->8 would be ignored since 8 is already in list, etc.).
+        // Save total cost of this. Or when finished with step below, do a final
+        // run through the graph to confirm etc.
+        // Sort to make sure it's in order (element 1 is 7->4, element 2 is 4->6 etc.).
+        // Return the added cost and assembled matrix with the last element's cost going back to 0 added.
+
+        int cost = 0;
+        int edgeCost;
+
+        String message = " Tour Success. With A Total Cost Of: ";
+
+        int tmpVisit = 0;
+        int currNode = 0;
+
+        int n = matrix.length;
+        int[] route = new int [n+1];
+
+        boolean[] visited = new boolean[n];
+
+
+        // Simply iterate through the whole graph, finding the lowest cost node and saving it.
+        // Next iteration just compares all unvisited nodes with the previous lowest cost node.
+
+        for (int i = 0; i < n-1; i++) {
+            edgeCost = Integer.MAX_VALUE; // to handle enormous euclidean things... probably paranoid with this.
+            for (int j = 0; j < n; j++) {
+
+                if (matrix[tmpVisit][j] != 0) {
+                    if (matrix[tmpVisit][j] < edgeCost && !visited[j]) {
+                        currNode = j;
+                        edgeCost = matrix[tmpVisit][j];
+                    }
+                }
+
+            }
+
+            if (i == 0) {
+                visited[i] = true;
+            }
+
+
+            if (edgeCost == Integer.MAX_VALUE) {
+                message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
+                break;
+            }
+
+            tmpVisit = currNode;
+            visited[tmpVisit] = true;
+
+            cost += edgeCost;
+            route[i+1] = tmpVisit;
+
+            if (i == n-2) {
+                if (matrix[tmpVisit][0] == 0) {
+                    // If there's no final connection, print special message.
+                    message = " Greed Is A Failure! No Final Path Home. Cost So Far: ";
+                    route[i+2] = -1;
+                } else {
+                    cost += matrix[tmpVisit][0];
+                }
+            }
+
+        }
+
+        return Arrays.toString(route) + message + cost;
     }
 
 

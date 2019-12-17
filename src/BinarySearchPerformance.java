@@ -1,21 +1,12 @@
 import java.awt.geom.Point2D;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
-
 import java.lang.management.ThreadMXBean;
-
-import java.io.*;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.RoundingMode;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Random;
 
 
 public class BinarySearchPerformance {
-
-
 
     static ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
 
@@ -27,9 +18,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 5;
+    static int numberOfTrials = 100;
 
-    static int MAXINPUTSIZE  = 14;
+    static int MAXINPUTSIZE  = 500;
 
     static int MININPUTSIZE  =  1;
 
@@ -51,11 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP-RandEuc-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-Greed-RandExcel-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP-RandEuc-Exp2.txt");
+        runFullExperiment("TSP-Greed-RandExcel-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP-RandEuc-Exp3.txt");
+        runFullExperiment("TSP-Greed-RandExcel-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -125,14 +116,14 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 11;
+        int i = 4;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
 
-             int[][] costMatrix = new int[i][i];
+             int[][] costMatrix;
 
-             costMatrix = generateEuclideanCircle(i);
+             costMatrix = generateRandCostMatrix(i);
 
          //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
@@ -235,7 +226,11 @@ public class BinarySearchPerformance {
                 //    System.out.println("List Sorted? " + verifySorted(testList));
                // BigInteger c = test1.MBIMultFast(ins,ins2);
 
-                TSPreturn = "Best Tour: " + test1.DP(costMatrix);
+              //  executorPool.submit(test1.greedy(costMatrix));
+
+
+              //TSPreturn = test1.greedy(costMatrix);
+                test1.greedy(costMatrix);
                // System.out.println("BF Version: " + test1.BF(costMatrix));
               //  System.out.println("DP Version: " +TSPreturn);
 
@@ -262,9 +257,9 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-            resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
+          //  resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
-            //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
+            resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
 
             resultsWriter.flush();
