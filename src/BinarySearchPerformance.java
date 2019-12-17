@@ -18,9 +18,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 100;
+    static int numberOfTrials = 5;
 
-    static int MAXINPUTSIZE  = 500;
+    static int MAXINPUTSIZE  = 14;
 
     static int MININPUTSIZE  =  1;
 
@@ -42,11 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandEucExcel-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-DP_Fast-Rand-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandEucExcel-Exp2.txt");
+        runFullExperiment("TSP-DP_Fast-Rand-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandEucExcel-Exp3.txt");
+        runFullExperiment("TSP-DP_Fast-Rand-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -123,7 +123,7 @@ public class BinarySearchPerformance {
 
              int[][] costMatrix;
 
-             costMatrix = generateRandEuclidean(i);
+             costMatrix = generateRandCostMatrix(i);
 
          //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
@@ -230,7 +230,8 @@ public class BinarySearchPerformance {
 
 
               //TSPreturn = test1.greedy(costMatrix);
-                test1.greedy(costMatrix);
+                test1.DP(costMatrix);
+                TSPreturn = "Best Tour: " + test1.getTour() + " With A Cost Of: " + test1.getTourCost();
                // System.out.println("BF Version: " + test1.BF(costMatrix));
               //  System.out.println("DP Version: " +TSPreturn);
 
@@ -257,9 +258,9 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-          //  resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
             // modified for easier importing to excel...
-            resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
+            //resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
 
             resultsWriter.flush();
