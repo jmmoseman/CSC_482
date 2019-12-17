@@ -411,7 +411,7 @@ public class Graphs {
         // Ignore identical nodes etc. (8->3 is added, 4->8 would be ignored since 8 is already in list, etc.).
         // Save total cost of this. Or when finished with step below, do a final run through the graph to confirm etc.
         // Sort to make sure it's in order (element 1 is 7->4, element 2 is 4->6 etc.).
-        // Return the added cost and assembled matrix with the last element's cost going back to 0 added.
+        // Return the added cost and assembled list (duplicates deleted) with the last element's cost going back to 0 added.
 
         int cost = 0;
         int edgeCost;
