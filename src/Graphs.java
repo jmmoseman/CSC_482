@@ -128,7 +128,7 @@ public class Graphs {
         int cost = 0;
         int edgeCost;
 
-        String message = " With A Total Cost Of: ";
+        String message = " Tour Success. With A Total Cost Of: ";
 
         int tmpVisit = 0;
         int currNode = 0;
@@ -398,14 +398,18 @@ public class Graphs {
         }
     }
 
-    String greedyExaust(int[][] matrix) { // To do...
+    String DP(int[][] matrix) { // Let's try and do this the right way (using pseudo code from the notes...)
 
-        // Search through all costs, store in list sorted from least to most.
+        return "";
+    }
+
+    String greedyExhaust(int[][] matrix) { // To do...
+
+        // Search through all costs, store in list sorted from least to most. Ignore identical connections (3->8 would be ignored if 8->3 is added).
         // Store costs with edges associated with them. (array of 2d arrays? Cost being the sortable key for the edges. Or some adt...).
         // Search through and put in order of best (start at beginning of array/list), until you have a list that = N (original matrix size) items.
         // Ignore identical nodes etc. (8->3 is added, 4->8 would be ignored since 8 is already in list, etc.).
-        // Save total cost of this. Or when finished with step below, do a final
-        // run through the graph to confirm etc.
+        // Save total cost of this. Or when finished with step below, do a final run through the graph to confirm etc.
         // Sort to make sure it's in order (element 1 is 7->4, element 2 is 4->6 etc.).
         // Return the added cost and assembled matrix with the last element's cost going back to 0 added.
 

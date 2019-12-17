@@ -42,11 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandExcel-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-Greed-RandEucExcel-Exp1-ThrowAway.txt");
        System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandExcel-Exp2.txt");
+        runFullExperiment("TSP-Greed-RandEucExcel-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-Greed-RandExcel-Exp3.txt");
+        runFullExperiment("TSP-Greed-RandEucExcel-Exp3.txt");
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -123,7 +123,7 @@ public class BinarySearchPerformance {
 
              int[][] costMatrix;
 
-             costMatrix = generateRandCostMatrix(i);
+             costMatrix = generateRandEuclidean(i);
 
          //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
