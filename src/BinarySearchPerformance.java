@@ -18,9 +18,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 1;
+    static int numberOfTrials = 100;
 
-    static int MAXINPUTSIZE  = 32;
+    static int MAXINPUTSIZE  = 500;
 
     static int MININPUTSIZE  =  1;
 
@@ -42,12 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DPxGreed-SQR-Exp1-ThrowAway.txt");
-     /*  System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP_Fast-Circle-Exp2.txt");
+        runFullExperiment("TSP-GreedExhaustLG-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP_Fast-Circle-Exp3.txt"); */
-
+        runFullExperiment("TSP-GreedExhaustLG-Exp2.txt");
+        System.out.println("Running first full experiment...");
+        runFullExperiment("TSP-GreedExhaustLG-Exp3.txt");
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
 
@@ -116,7 +115,7 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 8;
+        int i = 4;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
@@ -229,11 +228,11 @@ public class BinarySearchPerformance {
               //  executorPool.submit(test1.greedy(costMatrix));
 
 
-              TSPreturn = test1.greedyExhaust(costMatrix);
-              System.out.println("Greedy Exhaust: " + TSPreturn);
-              System.out.println("Greedy Normal: " + test1.greedy(costMatrix));
-              test1.DP(costMatrix);
-              System.out.println("DP Exact: " + test1.getTour() + " " + test1.getTourCost());
+             TSPreturn = test1.greedyExhaust(costMatrix);
+
+              //TSPreturn = "\nGreedy Exhaust: " + test1.greedyExhaust(costMatrix) +
+              //      "\nDP Exact:       " + test1.getTour() + " Tour Success. With A Total Cost Of: " + test1.getTourCost();
+
 
                // System.out.println("BF Version: " + test1.BF(costMatrix));
               //  System.out.println("DP Version: " +TSPreturn);

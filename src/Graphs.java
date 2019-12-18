@@ -1,4 +1,3 @@
-import javax.swing.text.Utilities;
 import java.util.*;
 
 public class Graphs {
@@ -496,10 +495,11 @@ public class Graphs {
    // So there will not be identical values, so those edges are not stored, and you get an incomplete tour.
    // Either that, or the way the costs are generated doesn't round to be exactly the same. So sometimes I noticed
    // even though it got the order mostly right, it was doing things like 1->3->2->4->5->6 etc...
-    // It also fails for the random cost graphs. Only a complete cost matrix works for this, unless the code is modified obviously.
+    // It also fails for the random cost graphs. Only a complete cost matrix ("randEuc") works for this, unless the code is modified obviously.
 
     // For better results, perhaps include the home node in the "costEdgeList", then "normalize" final tour list.
-    // Just leaving it like this for now. Produces interesting results. Sometimes lower SQR than normal greedy, sometimes higher.
+    // Just leaving it like this for now. It's currently slower and lower quality than the normal greedy... It does partially work though! :(
+    // I don't think this part of computer science is really my game. Although it kind of IS computer science...
 
     String greedyExhaust(double[][] matrix) {
 
