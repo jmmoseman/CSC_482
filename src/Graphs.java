@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import javax.swing.text.Utilities;
+import java.util.*;
 
 public class Graphs {
    // With Help From Psuedo code: https://en.wikipedia.org/wiki/Heap%27s_algorithm
@@ -122,10 +120,10 @@ public class Graphs {
         }
     }
 
-    String greedy(int[][] matrix) {
+    String greedy(double[][] matrix) {
 
-        int cost = 0;
-        int edgeCost;
+        double cost = 0;
+        double edgeCost;
 
         String message = " Tour Success. With A Total Cost Of: ";
 
@@ -405,13 +403,13 @@ public class Graphs {
     private int START_NODE;
     private int FINISHED_STATE;
 
-    private int[][] distance;
+    private double[][] distance;
     private double minTourCost = Double.POSITIVE_INFINITY;
 
     private List<Integer> tour = new ArrayList<>();
     private boolean ranSolver = false;
 
-    public void DP(int[][] distance) {
+    public void DP(double[][] distance) {
 
         this.distance = distance;
         N = distance.length;
@@ -494,76 +492,132 @@ public class Graphs {
         return memo[i][state] = minCost;
     }
 
-    String greedyExhaust(int[][] matrix) { // To do... Below is the idea if I don't get around to it... Don't really know if this will work TBH...
+   // This does not work properly for the circle tests due to the way it stores costs. It is hashable for that.
+   // So there will not be identical values, so those edges are not stored, and you get an incomplete tour.
+   // Either that, or the way the costs are generated doesn't round to be exactly the same. So sometimes I noticed
+   // even though it got the order mostly right, it was doing things like 1->3->2->4->5->6 etc...
+    // It also fails for the random cost graphs. Only a complete cost matrix works for this, unless the code is modified obviously.
 
-        // First, determine 0's lowest cost connection. Save this then make that node "visited" for the next step.
-        // Search through all costs, store in list sorted from least to most. Ignore identical connections (3->8 would be ignored if 8->3 is added).
-        // Store costs with edges associated with them. (array of 2d arrays? Cost being the sortable key for the edges. Or some adt...).
-        // Search through and put in order of best (start at beginning of array/list), until you have a list that = N (original costmatrix size) items.
-        // Ignore identical nodes etc. (8->3 is added, 4->8 would be ignored since 8 is already in list, etc.).
-        // Save total cost of this. Or when finished with step below, do a final run through the graph to confirm etc.
-        // Sort to make sure it's in order (element 1 is 7->4, element 2 is 4->6 etc.).
-        // Return the added cost and assembled list (duplicates deleted) with the last element's cost going back to 0 added.
+    // For better results, perhaps include the home node in the "costEdgeList", then "normalize" final tour list.
+    // Just leaving it like this for now. Produces interesting results. Sometimes lower SQR than normal greedy, sometimes higher.
 
-        int cost = 0;
-        int edgeCost;
+    String greedyExhaust(double[][] matrix) {
+
+        double cost = 0;
+        double edgeCost = Integer.MAX_VALUE;
 
         String message = " Tour Success. With A Total Cost Of: ";
 
-        int tmpVisit = 0;
         int currNode = 0;
 
         int n = matrix.length;
-        int[] route = new int [n+1];
 
         boolean[] visited = new boolean[n];
 
+        int[] finalRoute = new int[n+1];
 
-        // Simply iterate through the whole graph, finding the lowest cost node and saving it.
-        // Next iteration just compares all unvisited nodes with the previous lowest cost node.
+        Integer[] tmpEdges;
+        double tmpCost;
+
+        TreeMap<Double,Integer[]> costEdgeList = new TreeMap<>();
+
 
         for (int i = 0; i < n-1; i++) {
-            edgeCost = Integer.MAX_VALUE; // to handle enormous euclidean things... probably paranoid with this.
             for (int j = 0; j < n; j++) {
 
-                if (matrix[tmpVisit][j] != 0) {
-                    if (matrix[tmpVisit][j] < edgeCost && !visited[j]) {
-                        currNode = j;
-                        edgeCost = matrix[tmpVisit][j];
+                if (i == 0) {
+                    if (matrix[i][j] != 0) {
+                        if (matrix[i][j] < edgeCost) {
+                            currNode = j;
+                            edgeCost = matrix[i][j];
+                        }
+                    }
+                } else {
+                    if (j != 0 && i != j && !visited[j] && !visited[i]) {
+                        tmpEdges = new Integer[2];
+                        tmpEdges[0] = i;
+                        tmpEdges[1] = j;
+                        tmpCost = matrix[i][j];
+                        costEdgeList.put(tmpCost,tmpEdges);
                     }
                 }
 
             }
 
             if (i == 0) {
-                visited[i] = true;
-            }
-
-
-            if (edgeCost == Integer.MAX_VALUE) {
-                message = " Greed Is A Failure! Incomplete Tour. Cost So Far: ";
-                break;
-            }
-
-            tmpVisit = currNode;
-            visited[tmpVisit] = true;
-
-            cost += edgeCost;
-            route[i+1] = tmpVisit;
-
-            if (i == n-2) {
-                if (matrix[tmpVisit][0] == 0) {
-                    // If there's no final connection, print special message.
-                    message = " Greed Is A Failure! No Final Path Home. Cost So Far: ";
-                    route[i+2] = -1;
-                } else {
-                    cost += matrix[tmpVisit][0];
-                }
+                finalRoute[1] = currNode;
+                visited[currNode] = true;
             }
 
         }
 
-        return Arrays.toString(route) + message + cost;
+        Integer[] value;
+        HashSet<Integer> compare = new HashSet<>();
+        compare.add(finalRoute[1]);
+
+        int k = 3;
+
+        for (Map.Entry<Double, Integer[]> entry : costEdgeList.entrySet()) {
+
+            if (k == 3) {
+                value = entry.getValue();
+                finalRoute[2] = value[0];
+                finalRoute[3] = value[1];
+                compare.add(value[0]);
+                compare.add(value[1]);
+                k++;
+            }
+
+            value = entry.getValue();
+
+            if (!compare.contains(value[0]) && !compare.contains(value[1])) {
+                finalRoute[k] = value[0];
+                k++;
+                finalRoute[k] = value[1];
+                k++;
+                compare.add(value[0]);
+                compare.add(value[1]);
+            }
+
+            if (compare.size() >= n-2) {
+                break;
+            }
+
+        }
+
+        // On random costs it sometimes fails, then just puts the last few unsearched nodes in below...
+        for(int l = 1; l < n; l++) {
+            if (!compare.contains(l)) {
+                finalRoute[k] = l;
+                k++;
+            }
+        }
+
+        for (int m = 0; m < n; m++) {
+            if (matrix[finalRoute[m]][finalRoute[m+1]] == 0) {
+                message = " Greed Is A Failure! Incomplete Tour." +
+                        " Connection Failed at: (" + finalRoute[m] + "->" + finalRoute[m+1] +
+                         ") Cost So Far: ";
+                break;
+            }
+            cost += matrix[finalRoute[m]][finalRoute[m+1]];
+        }
+
+
+        // Original notes below:
+
+        // Search through all costs, store in list sorted from least to most. Ignore identical connections (3->8 would be ignored if 8->3 is added).
+        // Store costs with edges associated with them. (array of 2d arrays? Cost being the sortable key for the edges. Or some adt...).
+        // Search through and put in order of best (start at beginning of array/list), until you have a list that = N (original costmatrix size) items.
+        // Ignore identical nodes etc. (8->3 is added, 4->8 would be ignored since 8 is already in list, etc.).
+        // Save total cost of this. Or when finished with step below, do a final run through the graph to confirm etc.
+        // Ended up doing just this. Below was done automatically by the ADT used, and the logic I implemented.
+
+        // Sort to make sure it's in order (element 1 is 7->4, element 2 is 4->6 etc.).
+        // Return the added cost and assembled list (duplicates deleted) with the last element's cost going back to 0 added.
+
+
+        return Arrays.toString(finalRoute) + message + cost;
     }
 
 

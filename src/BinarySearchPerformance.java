@@ -18,9 +18,9 @@ public class BinarySearchPerformance {
 
     static long MINVALUE = -2000000000;
 
-    static int numberOfTrials = 5;
+    static int numberOfTrials = 1;
 
-    static int MAXINPUTSIZE  = 14;
+    static int MAXINPUTSIZE  = 32;
 
     static int MININPUTSIZE  =  1;
 
@@ -42,11 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP_Fast-Rand-Exp1-ThrowAway.txt");
-       System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP_Fast-Rand-Exp2.txt");
+        runFullExperiment("TSP-DPxGreed-SQR-Exp1-ThrowAway.txt");
+     /*  System.out.println("Running first full experiment...");
+        runFullExperiment("TSP-DP_Fast-Circle-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-DP_Fast-Rand-Exp3.txt");
+        runFullExperiment("TSP-DP_Fast-Circle-Exp3.txt"); */
 
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
@@ -116,14 +116,14 @@ public class BinarySearchPerformance {
 
         // https://www.baeldung.com/java-random-string For the random strings. (2). I made the function name simpler though...
 
-        int i = 4;
+        int i = 8;
         // for(String inputSize="a",inputSize2 = "a"; inputSize.length()<=MAXINPUTSIZE; inputSize+="a") {
         //for(int inputSize=MININPUTSIZE; inputSize<=MAXINPUTSIZE; inputSize+=1) {
          for(; i<=MAXINPUTSIZE; i+=1) {
 
-             int[][] costMatrix;
+             double[][] costMatrix;
 
-             costMatrix = generateRandCostMatrix(i);
+             costMatrix = generateRandEuclidean(i);
 
          //System.out.println("Cost Matrix: \n" + printMatrix(costMatrix));
 
@@ -229,9 +229,12 @@ public class BinarySearchPerformance {
               //  executorPool.submit(test1.greedy(costMatrix));
 
 
-              //TSPreturn = test1.greedy(costMatrix);
-                test1.DP(costMatrix);
-                TSPreturn = "Best Tour: " + test1.getTour() + " With A Cost Of: " + test1.getTourCost();
+              TSPreturn = test1.greedyExhaust(costMatrix);
+              System.out.println("Greedy Exhaust: " + TSPreturn);
+              System.out.println("Greedy Normal: " + test1.greedy(costMatrix));
+              test1.DP(costMatrix);
+              System.out.println("DP Exact: " + test1.getTour() + " " + test1.getTourCost());
+
                // System.out.println("BF Version: " + test1.BF(costMatrix));
               //  System.out.println("DP Version: " +TSPreturn);
 
@@ -413,8 +416,8 @@ public class BinarySearchPerformance {
         }
 
 
-    public static int[][] generateEuclideanCircle(int n) {
-        int[][] costMatrix = new int[n][n];
+    public static double[][] generateEuclideanCircle(int n) {
+        double[][] costMatrix = new double[n][n];
 
         double cost = 0;
 
@@ -432,15 +435,15 @@ public class BinarySearchPerformance {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
-                cost = Math.round(Point2D.distance(x[i], y[i], x[j], y[j]));
+                cost = Point2D.distance(x[i], y[i], x[j], y[j]);
 
                 if (i == j) {
                     cost = 0;
                 }
 
                 // Undirected of course
-                costMatrix[i][j] = (int)cost;
-                costMatrix[j][i] = (int)cost;
+                costMatrix[i][j] = cost;
+                costMatrix[j][i] = cost;
 
             }
         }
@@ -449,8 +452,8 @@ public class BinarySearchPerformance {
         return costMatrix;
     }
 
-    public static int[][] generateRandEuclidean(int n) {
-        int[][] costMatrix = new int[n][n];
+    public static double[][] generateRandEuclidean(int n) {
+        double[][] costMatrix = new double[n][n];
 
         double cost = 0;
 
@@ -467,15 +470,15 @@ public class BinarySearchPerformance {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
-                cost = Math.round(Point2D.distance(x[i], y[i], x[j], y[j]));
+                cost = Point2D.distance(x[i], y[i], x[j], y[j]);
 
                 if (i == j) {
                     cost = 0;
                 }
 
                 // Undirected of course
-                costMatrix[i][j] = (int)cost;
-                costMatrix[j][i] = (int)cost;
+                costMatrix[i][j] = cost;
+                costMatrix[j][i] = cost;
 
             }
         }
@@ -485,11 +488,11 @@ public class BinarySearchPerformance {
     }
 
 
-    public static int[][] generateRandCostMatrix(int n) {
+    public static double[][] generateRandCostMatrix(int n) {
 
         double cost;
 
-        int[][] costMatrix = new int[n][n];
+        double[][] costMatrix = new double[n][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -508,8 +511,8 @@ public class BinarySearchPerformance {
                 }
 
                 // Undirected of course
-                costMatrix[i][j] = (int)cost;
-                costMatrix[j][i] = (int)cost;
+                costMatrix[i][j] = cost;
+                costMatrix[j][i] = cost;
 
             }
         }
