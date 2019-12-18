@@ -505,8 +505,13 @@ public class Graphs {
     // Cost list pairs as I should have. It should have had pairs for the best edges for all NODES, not connections...
     // It should look like (1,2, 4,7, 3,6, 2,5, 5,3, 6,0, 0,4) etc.... Actually, going on another thought.
     // You take the first node from the first pair found on this list (1), and run the search again excluding
-    // this node. Generate list of pairs again etc. Repeat this until you have a full tour? There's quite a lot
-    // that you can do with this idea I think. Going to finally stop now...
+    // this node. If the lowest cost connection on the graph is 1,2, then you want to find the lowest cost for 2 to
+    // another node next. But when you search excluding 1, you want to save the costs of anything that comes before 2 on this
+    // next search. IE: 3,6, 5,0, 2,7. Save 3,6, 5,0. etc. Do another search finding lowest cost for 7, save
+    // anything before it (excluding those, 3 & 5 here, for future searches too), repeat until done. Another option, is to run a standard greedy search after you
+    // have found the lowest cost connection, excluding those starting nodes (1,2). "Smart Greedy" or something.
+
+    // A lot of possibilities for this stuff. I'll end now...
 
     String greedyExhaust(double[][] matrix) {
 
