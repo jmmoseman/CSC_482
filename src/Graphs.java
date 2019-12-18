@@ -501,6 +501,13 @@ public class Graphs {
     // Just leaving it like this for now. It's currently slower and lower quality than the normal greedy... It does partially work though! :(
     // I don't think this part of computer science is really my game. Although it kind of IS computer science...
 
+    // Thinking about this some more. I didn't follow my original thoughts properly. I didn't take as many nodes from the
+    // Cost list pairs as I should have. It should have had pairs for the best edges for all NODES, not connections...
+    // It should look like (1,2, 4,7, 3,6, 2,5, 5,3, 6,0, 0,4) etc.... Actually, going on another thought.
+    // You take the first node from the first pair found on this list (1), and run the search again excluding
+    // this node. Generate list of pairs again etc. Repeat this until you have a full tour? There's quite a lot
+    // that you can do with this idea I think. Going to finally stop now...
+
     String greedyExhaust(double[][] matrix) {
 
         double cost = 0;

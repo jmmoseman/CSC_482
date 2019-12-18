@@ -42,11 +42,11 @@ public class BinarySearchPerformance {
 
         // run the whole experiment at least twice, and expect to throw away the data from the earlier runs, before java has fully optimized
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedExhaustLG-Excel-Exp1-ThrowAway.txt");
+        runFullExperiment("TSP-GreedExhaustLG-Exp1-ThrowAway.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedExhaustLG-Excel-Exp2.txt");
+        runFullExperiment("TSP-GreedExhaustLG-Exp2.txt");
         System.out.println("Running first full experiment...");
-        runFullExperiment("TSP-GreedExhaustLG-Excel-Exp3.txt");
+        runFullExperiment("TSP-GreedExhaustLG-Exp3.txt");
 
       /*  long[] testList = {-1,3,2,-5,2,2,50,-20,-30};
 
@@ -228,7 +228,7 @@ public class BinarySearchPerformance {
               //  executorPool.submit(test1.greedy(costMatrix));
 
 
-             TSPreturn = test1.greedyExhaust(costMatrix);
+             test1.greedyExhaust(costMatrix);
 
               //TSPreturn = "\nGreedy Exhaust: " + test1.greedyExhaust(costMatrix) +
               //      "\nDP Exact:       " + test1.getTour() + " Tour Success. With A Total Cost Of: " + test1.getTourCost();
@@ -260,9 +260,9 @@ public class BinarySearchPerformance {
             /* print data for this size of input */
 
            // resultsWriter.printf("%12s %12s %15.2f \n", inputSize, inputSize2, averageTimePerTrialInBatch); // might as well make the columns look nice
-           // resultsWriter.printf("%12s %12s %15.2f \n", TSPreturn, i, averageTimePerTrialInBatch); // For big ints!
+            resultsWriter.printf("%12s %15.2f \n", i, averageTimePerTrialInBatch);
             // modified for easier importing to excel...
-            resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
+           // resultsWriter.printf("%15.2f \n", averageTimePerTrialInBatch);
           //  System.out.println(test1.lcsFast(inputSize,inputSize2,m,n,dp));
 
             resultsWriter.flush();
